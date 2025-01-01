@@ -1,65 +1,62 @@
-// import { useRef, useState } from 'react';
 // Import Swiper React components
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 // Import Swiper styles
 import 'swiper/css';
-import 'swiper/css/effect-coverflow';
 import 'swiper/css/pagination';
 
-import './Style.css'
+import './Style.css';
 
-import { EffectCoverflow, Pagination } from 'swiper/modules';
+// import required modules
+import { Pagination } from 'swiper/modules';
 
 const Banner = () => {
-    return (
-        <div>
-            <Swiper
-        effect={'coverflow'}
-        grabCursor={true}
-        centeredSlides={true}
-        slidesPerView={'auto'}
-        coverflowEffect={{
-          rotate: 50,
-          stretch: 0,
-          depth: 100,
-          modifier: 1,
-          slideShadows: true,
+  return (
+    <div className="w-full h-full">
+      <Swiper
+        slidesPerView={2}
+        spaceBetween={30}
+        pagination={{
+          clickable: true,
         }}
-        pagination={true}
-        modules={[EffectCoverflow, Pagination]}
+        modules={[Pagination]}
         className="mySwiper"
       >
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+            <img
+              src="https://i.ibb.co.com/qygsgth/Sajek.png"
+              alt="Sajek"
+              className="relative rounded-lg hover:cursor-pointer transition-transform transform hover:scale-110 hover:rotate-2 hover:shadow-xl duration-500 ease-in-out hover:border-4 hover:border-[#F9A51A] hover:border-opacity-100 hover:rounded-2xl"
+            />
+            <h3 className="absolute top-[65%] uppercase left-1/2 transform -translate-x-1/2 text-white text-lg font-bold">
+              Sajek Valley
+            </h3>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+            <img
+              src="https://i.ibb.co.com/CQSnKzF/Sreemongol.png"
+              alt="Sreemongol"
+              className="relative rounded-lg hover:cursor-pointer transition-transform transform hover:scale-110 hover:rotate-2 hover:shadow-xl duration-500 ease-in-out hover:border-4 hover:border-[#F9A51A] hover:border-opacity-100 hover:rounded-2xl"
+            />
+            <h3 className="absolute top-[65%] uppercase left-1/2 transform -translate-x-1/2 text-white text-lg font-bold">
+              Sreemongol
+            </h3>
         </SwiperSlide>
         <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+            <img
+              src="https://i.ibb.co.com/9VPswN2/sundorbon.png"
+              alt="Sunbdarbans"
+              className="relative rounded-lg hover:cursor-pointer transition-transform transform hover:scale-110 hover:rotate-2 hover:shadow-xl duration-500 ease-in-out hover:border-4 hover:border-[#F9A51A] hover:border-opacity-100 hover:rounded-2xl"
+            />
+            <h3 className="absolute top-[65%] uppercase left-1/2 transform -translate-x-1/2 text-white text-lg font-bold">
+              Sundarbans
+            </h3>
         </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-        </SwiperSlide>
-        <SwiperSlide>
-          <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-        </SwiperSlide>
+  
+      
       </Swiper>
-        </div>
-    );
+    </div>
+  );
 };
 
 export default Banner;
