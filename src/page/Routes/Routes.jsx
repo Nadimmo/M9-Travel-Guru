@@ -7,6 +7,7 @@ import Home from "../Home/Home";
 import Contact from "../Contact/Contact";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import Booking from "../Booking/Booking";
 
   const routes = createBrowserRouter([
     {
@@ -20,6 +21,10 @@ import Register from "../Register/Register";
         {
             path:"/search",
             element: <Search></Search>
+        },
+        {
+            path:"/booking",
+            element: <Booking></Booking>
         },
         {
             path:'/contact',

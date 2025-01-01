@@ -1,3 +1,5 @@
+const { Node } = require("postcss");
+
 module.exports = {
   root: true,
   env: { browser: true, es2020: true },
@@ -8,11 +10,12 @@ module.exports = {
     'plugin:react-hooks/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module', Node: true },
-  settings: { react: { version: '18.2' },
-  Node: true
- },
- 
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module',  },
+  settings: {
+    react: { version: '18.2' },
+    Node: true,
+  },
+
   plugins: ['react-refresh'],
   rules: {
     'react/jsx-no-target-blank': 'off',
