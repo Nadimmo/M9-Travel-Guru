@@ -23,7 +23,8 @@ dist-ssr
 *.sln
 *.sw?
 
-
+assets
+images
 Rectangle 26.png
 Rectangle 27.png
 Rectangle 28.png
