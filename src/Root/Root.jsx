@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import Header from "../page/Header/Header";
+import Header from "../page/Home/Header/Header";
 
 
 const Root = () => {
