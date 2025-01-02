@@ -6,6 +6,8 @@ import PopularDestinations from "./PopularDestination/PopuularDestinations";
 import FeaturedTravelPackages from "./FeaturedTravelPackages/FeaturedTravelPackages";
 import HowItWorks from "./HowItWorks/HowItWorks";
 import WhyChoosUs from "./WhyChoosUs/WhyChoosUs";
+import BlogAndNewsletter from "./BlogAndNewsletter/BlogAndNewsletter";
+import Reviews from "./Reviews/Reviews";
 const Home = () => {
   return (
     <div className="bg-gray-100 py-10 px-6">
@@ -33,6 +35,10 @@ const Home = () => {
       <HowItWorks></HowItWorks>
       {/* why choose use */}
       <WhyChoosUs></WhyChoosUs>
+      {/* Reviews */}
+      <Reviews></Reviews>
+      {/* Blog and newsletter */}
+      <BlogAndNewsletter></BlogAndNewsletter>
     </div>
 
   );
