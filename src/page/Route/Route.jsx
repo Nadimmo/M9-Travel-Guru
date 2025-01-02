@@ -9,7 +9,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Booking from "../Booking/Booking";
 
-  const routes = createBrowserRouter([
+  const Route = createBrowserRouter([
     {
       path: "/",
       element: <Root></Root>,
@@ -42,4 +42,4 @@ import Booking from "../Booking/Booking";
     },
   ]);
 
-  export default routes
+  export default Route;

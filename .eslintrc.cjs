@@ -1,4 +1,4 @@
-const { node } = require("postcss");
+const { Node } = require("postcss");
 
 module.exports = {
   root: true,
@@ -11,10 +11,9 @@ module.exports = {
     'plugin:react-hooks/recommended',
   ],
   ignorePatterns: ['dist', '.eslintrc.cjs'],
-  parserOptions: { ecmaVersion: 'latest', sourceType: 'module', node: true  },
+  parserOptions: { ecmaVersion: 'latest', sourceType: 'module', Node: true },
   settings: {
     react: { version: '18.2' },
-    node: true,
   },
 
   plugins: ['react-refresh'],

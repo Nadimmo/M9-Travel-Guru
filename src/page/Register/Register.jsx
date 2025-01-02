@@ -1,24 +1,69 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-undef */
 
+import { useContext } from 'react';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../AuthProvider/AuthProvider';
+import Swal from 'sweetalert2';
 
 const Register = () => {
+  // eslint-disable-next-line no-unused-vars
+  const { user, register, profileUpdate } = useContext(AuthContext)
+  // console.log(name)
 
+  const handlerSubmit = (e) => {
+    e.preventDefault();
+    const form = e.target;
+    const firstName = form.firstName.value;
+    const lastName = form.lastName.value;
+    const email = form.email.value;
+    const password = form.password.value;
+    const confirmPassword = form.confirmPassword.value;
+    const name = firstName + " " + lastName;
+    const userInfo = {
+      name: name,
+      email: email,
+      password: password
+    }
+    // console.log(userInfo)
+    // Perform server-side validation here
+    if (password !== confirmPassword) {
+      alert("Passwords do not match");
+      return;
+    }
 
-
-  
+    register(email, password)
+      .then(res => {
+        profileUpdate(name)
+        if (res.user) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Created user successfully",
+            showConfirmButton: false,
+            timer: 1500
+          });
+        }
+        form.reset()
+      })
+      .catch(err => {
+        alert(err.message)
+      })
+  }
 
 
 
 
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
+
       <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Create an Account
         </h2>
-        <form >
+        <form onSubmit={handlerSubmit}>
           <div className="mb-4">
             <label className="block text-sm font-medium text-gray-600 mb-1">
               First Name
@@ -94,11 +139,11 @@ const Register = () => {
         </div>
         {/* social login */}
         <div>
-          <button  className="w-full py-2 px-4 border rounded-2xl flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-100 transition-colors">
+          <button className="w-full py-2 px-4 border rounded-2xl flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-100 transition-colors">
             <FcGoogle className="w-6 h-6  " />
             <span>Sign up with Google</span>
           </button>
-          <button  className="w-full mt-2 py-2 px-4 border rounded-2xl flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-100 transition-colors">
+          <button className="w-full mt-2 py-2 px-4 border rounded-2xl flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-100 transition-colors">
             <FaFacebook className="w-6 h-6 text-[#3076FF]" />
             <span>Sign up with Facebook</span>
           </button>
@@ -108,4 +153,4 @@ const Register = () => {
   );
 };
 
-export default Register;
+export default Register
