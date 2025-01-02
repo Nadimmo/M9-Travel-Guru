@@ -36,6 +36,24 @@ const travelPackages = [
     description: "Relax and unwind on the pristine beaches of the Maldives.",
     deal: "Special Offer: Complimentary Spa Session",
   },
+  {
+    id: 5,
+    title: "Safari Adventure in SouthAfrica",
+    price: "$3,499",
+    duration: "10 Days / 9 Nights",
+    image: "https://i.ibb.co.com/K68FS5S/ragamati.jpg",
+    description: "Embark on a thrilling safari adventure and explore south africa's wildlife.",
+    deal: "Limited Offer: Free Balloon Ride",
+  },
+  {
+    id: 1,
+    title: "Romantic Getaway in Norway",
+    price: "$2,999",
+    duration: "7 Days / 6 Nights",
+    image: 'https://i.ibb.co.com/5Lx1Zvh/i4.jpg',
+    description: "Experience the beauty of Norway with luxurious stays and breathtaking views.",
+    deal: "Early Bird: Save 20%",
+  },
 ];
 
 const FeaturedTravelPackages = () => {

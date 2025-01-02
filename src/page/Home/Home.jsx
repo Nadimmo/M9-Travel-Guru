@@ -4,6 +4,8 @@ import './home.css'
 import { Link } from "react-router-dom";
 import PopularDestinations from "./PopularDestination/PopuularDestinations";
 import FeaturedTravelPackages from "./FeaturedTravelPackages/FeaturedTravelPackages";
+import HowItWorks from "./HowItWorks/HowItWorks";
+import WhyChoosUs from "./WhyChoosUs/WhyChoosUs";
 const Home = () => {
   return (
     <div className="bg-gray-100 py-10 px-6">
@@ -27,6 +29,10 @@ const Home = () => {
       <PopularDestinations></PopularDestinations>
       {/* Featured travel package */}
       <FeaturedTravelPackages></FeaturedTravelPackages>
+      {/* how it works */}
+      <HowItWorks></HowItWorks>
+      {/* why choose use */}
+      <WhyChoosUs></WhyChoosUs>
     </div>
 
   );
