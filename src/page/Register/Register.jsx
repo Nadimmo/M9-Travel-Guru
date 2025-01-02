@@ -4,13 +4,14 @@
 import { useContext } from 'react';
 import { FaFacebook } from 'react-icons/fa';
 import { FcGoogle } from 'react-icons/fc';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
 
 const Register = () => {
   // eslint-disable-next-line no-unused-vars
   const { user, register, profileUpdate } = useContext(AuthContext)
+  const navigate = useNavigate()
   // console.log(name)
 
   const handlerSubmit = (e) => {
@@ -47,6 +48,7 @@ const Register = () => {
           });
         }
         form.reset()
+        navigate('/')
       })
       .catch(err => {
         alert(err.message)

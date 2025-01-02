@@ -1,6 +1,27 @@
-import { NavLink } from "react-router-dom";
+import { useContext } from "react";
+import { NavLink, useNavigate } from "react-router-dom";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 const Header = () => {
+  const { user, logOut } = useContext(AuthContext)
+  const  navigate  = useNavigate()
+
+  const handlerSignOut = (e) => {
+    e.preventDefault()
+    logOut()
+        .then(() => {
+            Swal.fire({
+                title: 'Logged out successfully!',
+                text: 'You will be redirected to the home page.',
+                icon: 'success',
+                confirmButtonText: 'Continue'
+            })
+            navigate("/")
+        })
+}
+
+
   const Links = <>
     <li> <NavLink to="/"><a href="">Home</a></NavLink></li>
     <li> <NavLink to="/booking"><a href="">Booking</a></NavLink></li>
@@ -37,14 +58,16 @@ const Header = () => {
         <a className="ml-5 text-xl">Travel Guru</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-          <input type="search" name="" placeholder="Search your destination..." id="" className="p-2 border-2 border-gray-300 mr-4 rounded-lg" />
+        <input type="search" name="" placeholder="Search your destination..." id="" className="p-2 border-2 border-gray-300 mr-4 rounded-lg" />
         <ul className="menu menu-horizontal px-1">
 
           {Links}
         </ul>
       </div>
       <div className="navbar-end">
-        <NavLink to={'/login'}><a className="font-bold btn bg-[#F9A51A] hover:bg-violet-500 text-white">Login</a></NavLink>
+        {user ? <>
+          <button onClick={handlerSignOut}><a className="font-bold btn bg-[#F9A51A] hover:bg-violet-500 text-white">Sign Out</a></button>
+        </> : <> <NavLink to={'/login'}><a className="font-bold btn bg-[#F9A51A] hover:bg-violet-500 text-white">Login</a></NavLink></>}
       </div>
     </div>
   );

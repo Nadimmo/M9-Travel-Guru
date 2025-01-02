@@ -1,10 +1,43 @@
 /* eslint-disable react/no-unescaped-entities */
+import { useContext } from "react"
 import { FaFacebook } from "react-icons/fa"
 import { FcGoogle } from "react-icons/fc"
-import { Link } from "react-router-dom"
+import { Link, useNavigate } from "react-router-dom"
+import { AuthContext } from "../../AuthProvider/AuthProvider"
+import Swal from "sweetalert2"
 
 
 export const Login = () => {
+    const {login} = useContext(AuthContext)
+    const navigate = useNavigate()
+
+    const handlerSubmit = (e)=>{
+        e.preventDefault()
+       const form = e.target 
+       const email = form.email.value;
+       const password = form.password.value;
+        login(email, password)
+        .then(res =>{
+            if(res.user){
+                Swal.fire({
+                    title: 'Logged In Successfully',
+                    text: 'Welcome back!',
+                    icon: 'success',
+                    confirmButtonText: 'Continue',
+                })
+                form.reset()
+                navigate("/")
+            }
+        })
+       .catch(err =>{
+        Swal.fire({
+            title: 'Error!',
+            text: err.message,
+            icon: 'error',
+            confirmButtonText: 'Try Again',
+        })
+       })
+    }
  
     return (
         <div className="bg-gray-100 min-h-screen flex items-center justify-center">
@@ -12,7 +45,7 @@ export const Login = () => {
                 <h2 className="text-4xl text-left font-bold  text-gray-800 mb-6">
                     Login
                 </h2>
-                <form >
+                <form onSubmit={handlerSubmit}>
                     <div className="mb-4">
                         <label className="block text-sm font-medium text-gray-600 mb-1">
                             Email Address
