@@ -9,6 +9,9 @@ import Register from "../Register/Register";
 import Booking from "../Booking/Booking";
 import SearchPage from "../SearchPage/SearchPage";
 import About from "../About/About";
+import Dashboard from "./Dashboard";
+import MyBooking from "../Dashboard/MyBooking/MyBooking";
+import AllUsers from "../Dashboard/AllUsers/AllUsers";
 
   const Route = createBrowserRouter([
     {
@@ -45,6 +48,22 @@ import About from "../About/About";
         }
       ]
     },
+    {
+      path:'/dashboard',
+      element: <Dashboard></Dashboard>,
+      children:[
+        // user dashboard
+        {
+          path:'booking',
+          element: <MyBooking></MyBooking>
+        },
+        // admin dashboard
+        {
+          path:'allUsers',
+          element: <AllUsers></AllUsers>
+        }
+      ]
+    }
   ]);
 
   export default Route;
