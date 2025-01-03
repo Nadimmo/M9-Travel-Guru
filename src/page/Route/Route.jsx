@@ -8,6 +8,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Booking from "../Booking/Booking";
 import SearchPage from "../SearchPage/SearchPage";
+import About from "../About/About";
 
   const Route = createBrowserRouter([
     {
@@ -17,6 +18,10 @@ import SearchPage from "../SearchPage/SearchPage";
         {
             path:"/",
             element: <Home></Home>
+        },
+        {
+          path:'/about',
+          element: <About></About>
         },
         {
             path:"/search",
