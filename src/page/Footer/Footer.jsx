@@ -46,8 +46,8 @@ const Footer = () => {
           {/* Contact Information */}
           <div className="text-center md:text-right">
             <h3 className="text-lg font-semibold mb-4">Contact Us</h3>
-            <p className="text-sm mb-2">Address: 123 Your Street, City, Country</p>
-            <p className="text-sm mb-2">Email: <a href="mailto:support@yourcompany.com" className="hover:text-gray-400">support@yourcompany.com</a></p>
+            <p className="text-sm mb-2">Address: 123 Your Street, Rangpur city, Bangladesh</p>
+            <p className="text-sm mb-2">Email: <a href="mailto:contact@travelguru.com." className="hover:text-gray-400">support@yourcompany.com</a></p>
             <p className="text-sm">Phone: +1 (123) 456-7890</p>
           </div>
         </div>
