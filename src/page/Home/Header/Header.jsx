@@ -24,7 +24,7 @@ const Header = () => {
 
   const Links = <>
     <li> <NavLink to="/"><a href="">Home</a></NavLink></li>
-    <li> <NavLink to="/booking"><a href="">Booking</a></NavLink></li>
+    <li> <NavLink to="/booking"><a href="">Destination</a></NavLink></li>
     <li> <NavLink to="/search"><a href="">Search</a></NavLink></li>
     <li> <NavLink to="/contact"><a href="">Contact</a></NavLink></li>
   </>
@@ -58,7 +58,6 @@ const Header = () => {
         <a className="ml-5 text-xl">Travel Guru</a>
       </div>
       <div className="navbar-center hidden lg:flex">
-        <input type="search" name="" placeholder="Search your destination..." id="" className="p-2 border-2 border-gray-300 mr-4 rounded-lg" />
         <ul className="menu menu-horizontal px-1">
 
           {Links}

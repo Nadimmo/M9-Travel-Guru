@@ -2,12 +2,12 @@
 
 import { createBrowserRouter } from "react-router-dom";
 import Root from "../../Root/Root";
-import Search from "../Search/Search";
 import Home from "../Home/Home";
 import Contact from "../Contact/Contact";
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Booking from "../Booking/Booking";
+import SearchPage from "../SearchPage/SearchPage";
 
   const Route = createBrowserRouter([
     {
@@ -20,7 +20,7 @@ import Booking from "../Booking/Booking";
         },
         {
             path:"/search",
-            element: <Search></Search>
+            element: <SearchPage></SearchPage>
         },
         {
             path:"/booking",
