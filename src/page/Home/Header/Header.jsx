@@ -30,7 +30,7 @@ const Header = () => {
     <li> <NavLink to="/contact"><a href="">Contact</a></NavLink></li>
   </>
   return (
-    <div className="navbar bg-base-100 font-mono shadow-lg">
+    <div className="navbar bg-base-100 font-sans shadow-lg">
       <div className="navbar-start">
         <div className="dropdown">
           <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">

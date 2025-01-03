@@ -1,4 +1,6 @@
 import { useState } from "react";
+import ReactStars from "react-rating-stars-component";
+
 
 const travelData = {
   travel_data: [
@@ -11,8 +13,8 @@ const travelData = {
           description: "Comfortable economy-class round-trip flight to Paris with in-flight meals and WiFi.",
           price: 799,
           currency: "USD",
-          facilities: { class: "Economy", baggage: "1 carry-on, 1 checked bag", in_flight_meals: true, wifi: true },
-          rating: 4.5,
+          facilities: { class: "Business", beds: 4, bedrooms: 2, guests: 4, bathrooms: 2, wifi: true, pool: true, parking: true },
+          rating: 5,
         },
         {
           image: "https://i.ibb.co.com/6FDXyCg/malaysia.jpg",
@@ -20,7 +22,7 @@ const travelData = {
           description: "Luxurious business-class flight to Tokyo with lounge access and extra legroom.",
           price: 2150,
           currency: "USD",
-          facilities: { class: "Business", baggage: "2 checked bags", in_flight_meals: true, wifi: true, lounge_access: true },
+          facilities: { class: "Classic", beds: 2, bedrooms: 1, guests: 1, bathrooms: 1, wifi: true, pool: true, parking: true },
           rating: 4.8,
         },
       ],
@@ -34,8 +36,8 @@ const travelData = {
           description: "5-star hotel in Manhattan with rooftop views and premium amenities.",
           price_per_night: 350,
           currency: "USD",
-          facilities: { beds: 2, bedrooms: 1, guests: 4, bathrooms: 1, wifi: true, pool: true, parking: true },
-          rating: 4.8,
+          facilities: { class: "Economy", beds: 3, bedrooms: 2, guests: 2, bathrooms: 2, wifi: true, pool: true, parking: true },
+          rating: 5,
         },
         {
           image: "https://i.ibb.co.com/Pmtq0k4/c4.jpg",
@@ -43,7 +45,7 @@ const travelData = {
           description: "Relax by the beach with a private villa and ocean views.",
           price_per_night: 270,
           currency: "USD",
-          facilities: { beds: 1, bedrooms: 1, guests: 2, bathrooms: 1, wifi: true, pool: true, spa: true },
+          facilities: { class: "Classic", beds: 2, bedrooms: 1, guests: 1, bathrooms: 1, wifi: true, pool: true, parking: true },
           rating: 4.7,
         },
       ],
@@ -57,8 +59,17 @@ const travelData = {
           description: "Relax in luxury with flights, meals, and island activities included.",
           price: 2999,
           currency: "USD",
-          facilities: { nights: 7, meals: "All meals included", activities: ["Snorkeling", "Spa treatments", "Island tours"] },
+          facilities: { class: "Economy", beds: 3, bedrooms: 2, guests: 2, bathrooms: 2, wifi: true, pool: true, parking: true },
           rating: 4.9,
+        },
+        {
+          image: "https://i.ibb.co.com/jVrYNWS/world.webp",
+          title: "7-Day All-Inclusive Nepal Vacation",
+          description: "Relax in luxury with flights, meals, and island activities included.",
+          price: 2999,
+          currency: "USD",
+          facilities: { class: "Economy", beds: 3, bedrooms: 2, guests: 2, bathrooms: 2, wifi: true, pool: true, parking: true },
+          rating: 5,
         },
       ],
     },
@@ -105,17 +116,28 @@ const SearchPage = () => {
               <p className="text-sm text-gray-600 mb-2">{item.description}</p>
               <div className="text-sm text-gray-800">
                 <p>
-                  <strong>Price:</strong> {item.price || item.price_per_night} {item.currency}
-                </p>
-                <p>
-                  <strong>Rating:</strong> {item.rating} ★
+                  <strong>Facilities:</strong> {item.facilities.class}  {item.facilities.beds} Beds  ,{item.facilities.bedrooms} Bedrooms , {item.facilities.guests} Guests, {item.facilities.bathrooms} Bathrooms , WiFi: {item.facilities.wifi ? "Yes" : "No"} , Pool: {item.facilities.pool ? "Yes" : "No"} , Parking: {item.facilities.parking ? "Yes" : "No"} , Spa: {item.facilities.spa ? "Yes" : "No"}
                 </p>
               </div>
+              <div className="text-sm text-gray-800 mt-2 lg:flex justify-between">
+                <p>
+                  <strong>Price:</strong> Per Night  / {item.price || item.price_per_night} {item.currency}
+                </p>
+                <p className="flex items-center">
+                  <strong>Rating:</strong>  <ReactStars
+                    value={item.rating}
+                    size={24}
+                    activeColor="#ffd700"
+                  />,
+                </p>
+              </div>
+              <a href="/" className="text-blue-500 hover:underline font-semibold mt-2">Read more</a>
+
             </div>
           ))
         )}
       </div>
-    </div>
+    </div >
   );
 };
 
