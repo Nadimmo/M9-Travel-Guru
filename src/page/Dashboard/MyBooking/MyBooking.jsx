@@ -18,7 +18,7 @@ const MyBooking = () => {
             Total Bookings: <span className="font-bold">{totalBookings}</span>
           </p>
           <p className="text-lg font-semibold text-green-700">
-            Total Price: <span className="font-bold">${totalPrice}</span>
+            Total Price: <span className="font-bold">$ {totalPrice}</span>
           </p>
         </div>
       </div>
@@ -45,7 +45,7 @@ const MyBooking = () => {
                     {booking.email}
                   </td>
                   <td className="py-3 px-6 border-b border-gray-200 text-gray-700 font-bold">
-                    {booking.price}
+                    $ {booking.price}
                   </td>
                 </tr>
               ))

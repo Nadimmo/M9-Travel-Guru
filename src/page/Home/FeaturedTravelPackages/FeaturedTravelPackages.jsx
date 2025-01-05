@@ -100,7 +100,7 @@ const FeaturedTravelPackages = () => {
             />
             <div className="p-4">
               <h3 className="text-xl font-semibold mb-2">{pkg.title}</h3>
-              <p className="text-gray-800 font-bold mb-1">Price: {pkg.price}</p>
+              <p className="text-gray-800 font-bold mb-1">Price: $ {pkg.price}</p>
               <p className="text-gray-600 mb-1">Duration: {pkg.duration}</p>
               <p className="text-gray-600 mb-3">{pkg.description}</p>
               {pkg.deal && (
