@@ -5,8 +5,8 @@ const About = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-4xl font-bold text-gray-800 text-center">About Travel Guru</h1>
         <p className="mt-6 text-lg text-gray-600 text-center">
-          At Travel Guru, we are passionate about making travel seamless, exciting, and memorable. 
-          Whether you are planning a solo adventure, a romantic getaway, or a family vacation, 
+          At Travel Guru, we are passionate about making travel seamless, exciting, and memorable.
+          Whether you are planning a solo adventure, a romantic getaway, or a family vacation,
           we have the tools and expertise to help you every step of the way.
         </p>
 
@@ -14,7 +14,7 @@ const About = () => {
           <div className="bg-white p-6 rounded-lg shadow-md">
             <h2 className="text-2xl font-semibold text-gray-800">Our Mission</h2>
             <p className="mt-4 text-gray-600">
-              To inspire and empower travelers around the globe by providing reliable resources, 
+              To inspire and empower travelers around the globe by providing reliable resources,
               expert advice, and innovative solutions for every journey.
             </p>
           </div>
@@ -30,11 +30,27 @@ const About = () => {
           </div>
         </div>
 
-        <div className="mt-10">
-          <h2 className="text-2xl font-semibold text-gray-800 text-center">Your Benefits</h2>
-          <p className="mt-4 text-gray-600 text-center">
-            Enjoy exclusive travel deals, earn rewards with every booking, and access insider tips to make your journey unforgettable.
-          </p>
+        <div className="flex flex-wrap justify-center mb-24 mt-4 bg-white p-6 rounded-lg shadow-md">
+          <div className="w-full lg:w-6/12 px-4">
+            <h2 className="text-3xl font-semibold">Your Benefits</h2>
+            <ul className="list-none">
+              <li className="py-2">
+                <span className="text-lg leading-relaxed text-gray-600">
+                  Personalized Travel Planning: Our team of experts will work with you to create a customized itinerary that meets your unique needs and preferences.
+                </span>
+              </li>
+              <li className="py-2">
+                <span className="text-lg leading-relaxed text-gray-600">
+                  Unbeatable Prices: We have established relationships with top travel suppliers to ensure that our customers receive the best possible prices.
+                </span>
+              </li>
+              <li className="py-2">
+                <span className="text-lg leading-relaxed text-gray-600">
+                  24/7 Support: Our dedicated team is available around the clock to assist with any questions or concerns you may have.
+                </span>
+              </li>
+            </ul>
+          </div>
         </div>
 
         <div className="mt-10">
@@ -52,7 +68,7 @@ const About = () => {
 
           <div className="mt-8 lg:grid grid-cols-3 mx-auto">
             {/* Example Team Member */}
-            <div className="text-center">
+            <div className="text-center ">
               <img
                 src="https://i.ibb.co.com/QpNDpmR/Ellipse-91.png"
                 alt="Team Member"
@@ -63,7 +79,7 @@ const About = () => {
             </div>
             <div className="text-center">
               <img
-                src="https://i.ibb.co.com/QpNDpmR/Ellipse-91.png"
+                src="https://i.ibb.co.com/ZWzykDF/Ellipse-92.png"
                 alt="Team Member"
                 className="w-24 h-24 mx-auto rounded-full object-cover"
               />
@@ -72,7 +88,7 @@ const About = () => {
             </div>
             <div className="text-center">
               <img
-                src="https://i.ibb.co.com/QpNDpmR/Ellipse-91.png"
+                src="https://i.ibb.co.com/bL9nVVT/Ellipse-2.png"
                 alt="Team Member"
                 className="w-24 h-24 mx-auto rounded-full object-cover"
               />
