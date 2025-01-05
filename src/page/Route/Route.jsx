@@ -14,6 +14,7 @@ import MyBooking from "../Dashboard/MyBooking/MyBooking";
 import AllUsers from "../Dashboard/AllUsers/AllUsers";
 import AddReview from "../Dashboard/AddReview/AddReview";
 import MyDestination from "../Dashboard/MyDestination/MyDestination";
+import AllBooking from "../Dashboard/AllBooking/AllBooking";
 
   const Route = createBrowserRouter([
     {
@@ -71,6 +72,10 @@ import MyDestination from "../Dashboard/MyDestination/MyDestination";
         {
           path:'allUsers',
           element: <AllUsers></AllUsers>
+        },
+        {
+          path:'allBooking',
+          element: <AllBooking></AllBooking>
         }
       ]
     }
