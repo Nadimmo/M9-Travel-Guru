@@ -1,14 +1,11 @@
+import { useState } from 'react';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const BookingForm = () => {
+  const axiosPublic = useAxiosPublic()
   const divisions = [
-    'Barisal',
-    'Chittagong',
-    'Dhaka',
-    'Khulna',
-    'Mymensingh',
-    'Rajshahi',
-    'Rangpur',
-    'Sylhet',
+    'Barisal', 'Chittagong', 'Dhaka', 'Khulna', 'Mymensingh', 'Rajshahi', 'Rangpur', 'Sylhet',
   ];
 
   const cities = [
@@ -19,13 +16,78 @@ const BookingForm = () => {
     'Madaripur', 'Magura', 'Manikganj', 'Meherpur', 'Moulvibazar', 'Munshiganj', 'Mymensingh', 'Naogaon',
     'Narail', 'Narayanganj', 'Narsingdi', 'Natore', 'Netrokona', 'Nilphamari', 'Noakhali', 'Pabna',
     'Panchagarh', 'Patuakhali', 'Pirojpur', 'Rajbari', 'Rajshahi', 'Rangamati', 'Rangpur', 'Satkhira',
-    'Shariatpur', 'Sherpur', 'Sirajganj', 'Sunamganj', 'Sylhet', 'Tangail', 'Thakurgaon'
+    'Shariatpur', 'Sherpur', 'Sirajganj', 'Sunamganj', 'Sylhet', 'Tangail', 'Thakurgaon',
   ];
+
+  const [formData, setFormData] = useState({
+    email: '',
+    origin: '',
+    destination: '',
+    startDateTime: '',
+    endDateTime: '',
+  });
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData((prevData) => ({
+      ...prevData,
+      [name]: value,
+    }));
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+
+    axiosPublic.post('/destination', formData)
+      .then(res => {
+        if (res.data.insertedId) {
+          Swal.fire({
+            position: "top-end",
+            icon: "success",
+            title: "Booking Successful",
+            showConfirmButton: false,
+            timer: 1500,
+          })
+          setFormData({
+            email: '',
+            origin: '',
+            destination: '',
+            startDateTime: '',
+            endDateTime: '',
+          });
+        }
+      })
+      .catch(err => {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: err.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        console.log(err);
+      })
+  };
 
   return (
     <div className="min-h-screen flex items-center justify-center py-10 font-bold">
-      <form className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
+      <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
         <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">Book Your Trip</h2>
+
+        {/* Email */}
+        <div className="mb-4">
+          <label htmlFor="email" className="block text-sm font-medium text-gray-600 mb-2">Email</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
+          />
+        </div>
 
         {/* Origin */}
         <div className="mb-4">
@@ -33,7 +95,10 @@ const BookingForm = () => {
           <select
             id="origin"
             name="origin"
+            value={formData.origin}
+            onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           >
             <option value="">Select Origin</option>
             {divisions.map((division) => (
@@ -48,7 +113,10 @@ const BookingForm = () => {
           <select
             id="destination"
             name="destination"
+            value={formData.destination}
+            onChange={handleChange}
             className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+            required
           >
             <option value="">Select Destination</option>
             {cities.map((city) => (
@@ -65,7 +133,10 @@ const BookingForm = () => {
               type="datetime-local"
               id="startDateTime"
               name="startDateTime"
+              value={formData.startDateTime}
+              onChange={handleChange}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
 
@@ -76,7 +147,10 @@ const BookingForm = () => {
               type="datetime-local"
               id="endDateTime"
               name="endDateTime"
+              value={formData.endDateTime}
+              onChange={handleChange}
               className="w-full border border-gray-300 rounded-lg px-3 py-2 text-gray-700 focus:outline-none focus:ring-2 focus:ring-blue-500"
+              required
             />
           </div>
         </div>

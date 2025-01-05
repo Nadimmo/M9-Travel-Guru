@@ -8,7 +8,6 @@ const Dashboard = () => {
         <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
         {/* Admin Links */}
         <div className="mb-8">
-          <h3 className="text-lg font-semibold mb-4">Admin Dashboard</h3>
           <ul className="space-y-3">
             <NavLink
               to="/dashboard/booking"
@@ -56,7 +55,6 @@ const Dashboard = () => {
         <div className="border-t border-white my-6"></div>
         {/* User Links */}
         <div>
-          <h3 className="text-lg font-semibold mb-4">User Dashboard</h3>
           <ul className="space-y-3">
             <NavLink
               to="/dashboard/package"
