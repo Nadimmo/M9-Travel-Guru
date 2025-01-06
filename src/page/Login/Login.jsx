@@ -5,11 +5,13 @@ import { FcGoogle } from "react-icons/fc"
 import { Link, useNavigate } from "react-router-dom"
 import { AuthContext } from "../../AuthProvider/AuthProvider"
 import Swal from "sweetalert2"
+import useAxiosPublic from "../Hooks/useAxiosPublic"
 
 
 export const Login = () => {
-    const {login} = useContext(AuthContext)
+    const {login, loginWithGoogle} = useContext(AuthContext)
     const navigate = useNavigate()
+    const axiosPublic = useAxiosPublic()
 
     const handlerSubmit = (e)=>{
         e.preventDefault()
@@ -39,6 +41,50 @@ export const Login = () => {
        })
     }
  
+     const handlerGoogleLogin = (e) => {
+        e.preventDefault()
+        loginWithGoogle()
+         .then(res => {
+            const userInfo = {
+              name: res.user.displayName,
+              email: res.user.email,
+            }
+            axiosPublic.post('/users', userInfo)
+             .then(res => {
+               if (res.data.insertedId) {
+                 Swal.fire({
+                   position: "top-end",
+                   icon: "success",
+                   title: "Created user successfully",
+                   showConfirmButton: false,
+                   timer: 1500
+                 });
+               }else{
+                Swal.fire({
+                  position: "top-end",
+                  icon: "success",
+                  title: "Created user successfully",
+                  showConfirmButton: false,
+                  timer: 1500
+                });
+               }
+               navigate('/')
+             })
+            navigate('/')
+          })
+         .catch(err => {
+            Swal.fire({
+              position: "top-end",
+              icon: "error",
+              title: err.message,
+              showConfirmButton: false,
+              timer: 1500
+            })
+          })
+      }
+    
+
+
     return (
         <div className="bg-gray-100 min-h-screen flex items-center justify-center">
             <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-xl">
@@ -88,7 +134,7 @@ export const Login = () => {
                 </div>
                 {/* social login */}
                 <div>
-                    <button className="w-full py-2 px-4 border rounded-2xl flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-100 transition-colors">
+                    <button onClick={handlerGoogleLogin} className="w-full py-2 px-4 border rounded-2xl flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-100 transition-colors">
                         <FcGoogle className="w-6 h-6  " />
                         <span>Sign up with Google</span>
                     </button>

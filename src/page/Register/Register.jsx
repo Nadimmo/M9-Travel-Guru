@@ -7,11 +7,13 @@ import { FcGoogle } from 'react-icons/fc';
 import { Link, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../Hooks/useAxiosPublic';
 
 const Register = () => {
   // eslint-disable-next-line no-unused-vars
-  const { user, register, profileUpdate } = useContext(AuthContext)
+  const {loginWithGoogle ,user, register, profileUpdate } = useContext(AuthContext)
   const navigate = useNavigate()
+  const axiosPublic = useAxiosPublic()
   // console.log(name)
 
   const handlerSubmit = (e) => {
@@ -26,7 +28,6 @@ const Register = () => {
     const userInfo = {
       name: name,
       email: email,
-      password: password
     }
     // console.log(userInfo)
     // Perform server-side validation here
@@ -38,23 +39,68 @@ const Register = () => {
     register(email, password)
       .then(res => {
         profileUpdate(name)
-        if (res.user) {
-          Swal.fire({
-            position: "top-end",
-            icon: "success",
-            title: "Created user successfully",
-            showConfirmButton: false,
-            timer: 1500
-          });
-        }
-        form.reset()
-        navigate('/')
+        axiosPublic.post('/users', userInfo)
+          .then(res => {
+            if (res.data.insertedId) {
+              Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "Created user successfully",
+                showConfirmButton: false,
+                timer: 1500
+              });
+            }
+            form.reset()
+            navigate('/')
+          })
       })
       .catch(err => {
         alert(err.message)
       })
   }
 
+  const handlerGoogleLogin = (e) => {
+    e.preventDefault()
+    loginWithGoogle()
+     .then(res => {
+        const userInfo = {
+          name: res.user.displayName,
+          email: res.user.email,
+        }
+        axiosPublic.post('/users', userInfo)
+         .then(res => {
+           if (res.data.insertedId) {
+             Swal.fire({
+               position: "top-end",
+               icon: "success",
+               title: "Created user successfully",
+               showConfirmButton: false,
+               timer: 1500
+             });
+           }else{
+            Swal.fire({
+              position: "top-end",
+              icon: "success",
+              title: "Created user successfully",
+              showConfirmButton: false,
+              timer: 1500
+            });
+           }
+           form.reset()
+           navigate('/')
+         })
+        navigate('/')
+      })
+     .catch(err => {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: err.message,
+          showConfirmButton: false,
+          timer: 1500
+        })
+      })
+  }
 
 
 
@@ -141,7 +187,7 @@ const Register = () => {
         </div>
         {/* social login */}
         <div>
-          <button className="w-full py-2 px-4 border rounded-2xl flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-100 transition-colors">
+          <button onClick={handlerGoogleLogin} className="w-full py-2 px-4 border rounded-2xl flex items-center justify-center gap-2 text-gray-600 hover:bg-gray-100 transition-colors">
             <FcGoogle className="w-6 h-6  " />
             <span>Sign up with Google</span>
           </button>

@@ -1,6 +1,6 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
-import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from "firebase/auth";
+import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import { createContext, useEffect, useState } from "react";
 import app from "../Firebase/firebase.config";
 
@@ -36,6 +36,11 @@ const AuthProvider = ({children}) => {
         return signOut(auth)
     }
 
+    const loginWithGoogle = ()=>{
+        setLoading(true)
+        return signInWithPopup(auth, GoogleProvider)
+    }
+
     useEffect(()=>{
         const Unsubscribe = onAuthStateChanged(auth,(currentUser)=>{
             setUser(currentUser)
@@ -54,7 +59,8 @@ const AuthProvider = ({children}) => {
         user,
         logOut,
         profileUpdate,
-        loading
+        loading,
+        loginWithGoogle
     }
 
     return (
