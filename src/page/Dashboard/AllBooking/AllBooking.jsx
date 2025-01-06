@@ -5,16 +5,19 @@ const AllBooking = () => {
 
   // Calculate total bookings and total price
   const totalBookings = bookings.length;
-  const totalPrice = bookings.reduce((sum, booking) => sum + parseInt(booking.price || 0), 0);
+  const totalPrice = bookings.reduce(
+    (sum, booking) => sum + parseInt(booking.price || 0),
+    0
+  );
 
   return (
     <div className="py-10 px-6">
-      <h2 className="text-3xl font-bold text-center mb-6 text-blue-600">
+      <h2 className="text-3xl font-bold text-center mb-6 text-[#F9A51A]">
         My Bookings
       </h2>
       <div className="mb-6">
-        <div className="flex justify-between items-center bg-blue-100 p-4 rounded-lg shadow-md">
-          <p className="text-lg font-semibold text-blue-700">
+        <div className="flex justify-between items-center bg-[#F9A51A]/20 p-4 rounded-lg shadow-md">
+          <p className="text-lg font-semibold text-[#F9A51A]">
             Total Bookings: <span className="font-bold">{totalBookings}</span>
           </p>
           <p className="text-lg font-semibold text-green-700">
@@ -25,7 +28,8 @@ const AllBooking = () => {
       <div className="overflow-x-auto shadow-lg rounded-lg">
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
-            <tr className="bg-blue-500 text-white">
+            <tr className="bg-[#F9A51A] text-white">
+              <th className="py-3 px-6 text-left font-semibold">#</th>
               <th className="py-3 px-6 text-left font-semibold">Name</th>
               <th className="py-3 px-6 text-left font-semibold">Email</th>
               <th className="py-3 px-6 text-left font-semibold">Price</th>
@@ -36,8 +40,11 @@ const AllBooking = () => {
               bookings.map((booking, index) => (
                 <tr
                   key={index}
-                  className="hover:bg-blue-100 transition-colors duration-200"
+                  className="hover:bg-[#F9A51A]/10 transition-colors duration-200"
                 >
+                  <td className="py-3 px-6 border-b border-gray-200 text-gray-700">
+                    {index+1}.
+                  </td>
                   <td className="py-3 px-6 border-b border-gray-200 text-gray-700">
                     {booking.name}
                   </td>

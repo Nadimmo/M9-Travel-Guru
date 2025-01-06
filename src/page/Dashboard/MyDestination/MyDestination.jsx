@@ -15,7 +15,7 @@ const MyDestination = () => {
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-blue-500 text-white">
-              <th></th>
+              <th className="py-3 px-6 text-left font-semibold">#</th>
               <th className="py-3 px-6 text-left font-semibold">Email</th>
               <th className="py-3 px-6 text-left font-semibold">Origin</th>
               <th className="py-3 px-6 text-left font-semibold">Destination</th>
