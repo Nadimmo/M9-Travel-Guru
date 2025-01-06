@@ -79,7 +79,6 @@ const FeaturedTravelPackages = () => {
     })
 
 
-    console.log(bookingInfo)
     // Process booking form here
     handleCloseModal();
   };

@@ -30,7 +30,7 @@ const MyDestination = () => {
                   key={index}
                   className="hover:bg-blue-100 transition-colors duration-200"
                 >
-                  <td> {index+1}.</td>
+                  <td className="py-3 px-6 border-b border-gray-200 text-gray-700"> {index+1}.</td>
                   <td className="py-3 px-6 border-b border-gray-200 text-gray-700">
                     {destination.email}
                   </td>

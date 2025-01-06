@@ -1,11 +1,41 @@
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useBooking from "../../Hooks/useBooking";
 
 const MyBooking = () => {
-  const { bookings } = useBooking();
+  const { bookings, refetch} = useBooking();
+  const axiosPublic = useAxiosPublic()
 
   // Calculate total bookings and total price
   const totalBookings = bookings.length;
   const totalPrice = bookings.reduce((sum, booking) => sum + parseInt(booking.price || 0), 0);
+
+
+  const handleRemove = (id)=>{
+    axiosPublic.delete(`/booking/${id}`)
+    .then(res =>{
+      if(res.data. deletedCount ){
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Booking removed successfully",
+          showConfirmButton: false,
+          timer: 1500
+        })
+        refetch()
+      }
+    })
+    .catch(err =>{
+      Swal.fire({
+        position: "top-end",
+        icon: "error",
+        title: err.message,
+        showConfirmButton: false,
+        timer: 1500
+      });
+    })
+
+  }
 
   return (
     <div className="py-10 px-6">
@@ -26,9 +56,11 @@ const MyBooking = () => {
         <table className="min-w-full bg-white border border-gray-200">
           <thead>
             <tr className="bg-blue-500 text-white">
+              <th></th>
               <th className="py-3 px-6 text-left font-semibold">Name</th>
               <th className="py-3 px-6 text-left font-semibold">Email</th>
               <th className="py-3 px-6 text-left font-semibold">Price</th>
+              <th className="py-3 px-6 text-left font-semibold">Action</th>
             </tr>
           </thead>
           <tbody>
@@ -39,6 +71,9 @@ const MyBooking = () => {
                   className="hover:bg-blue-100 transition-colors duration-200"
                 >
                   <td className="py-3 px-6 border-b border-gray-200 text-gray-700">
+                    {index + 1}.
+                  </td>
+                  <td className="py-3 px-6 border-b border-gray-200 text-gray-700">
                     {booking.name}
                   </td>
                   <td className="py-3 px-6 border-b border-gray-200 text-gray-700">
@@ -46,6 +81,11 @@ const MyBooking = () => {
                   </td>
                   <td className="py-3 px-6 border-b border-gray-200 text-gray-700 font-bold">
                     $ {booking.price}
+                  </td>
+                  <td className="py-3 px-6 border-b border-gray-200 text-gray-700 font-bold">
+                    <button onClick={()=> handleRemove(booking._id)} className="inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700">
+                      Cancel
+                    </button>
                   </td>
                 </tr>
               ))

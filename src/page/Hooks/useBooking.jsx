@@ -6,14 +6,14 @@ import { useQuery } from "@tanstack/react-query"
 const useBooking = () => {
     const { user } = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
-    const { data: bookings = [] } = useQuery({
+    const {refetch, data: bookings = [] } = useQuery({
         queryKey: ['bookings', user?.email],
         queryFn: async () => {
             const res = await axiosPublic.get(`/booking?email=${user?.email}`)
             return res.data
         }
     })
-    return { bookings }
+    return { bookings, refetch }
 }
 
 export default useBooking
