@@ -16,6 +16,7 @@ import AddReview from "../Dashboard/AddReview/AddReview";
 import MyDestination from "../Dashboard/MyDestination/MyDestination";
 import AllBooking from "../Dashboard/AllBooking/AllBooking";
 import AddPackage from "../Dashboard/AddPackage/AddPackage";
+import ManagePackage from "../Dashboard/ManagePackage/ManagePackage";
 
   const Route = createBrowserRouter([
     {
@@ -81,6 +82,10 @@ import AddPackage from "../Dashboard/AddPackage/AddPackage";
         {
           path: 'addPackage',
           element: <AddPackage></AddPackage>
+        },
+        {
+          path: 'manage',
+          element: <ManagePackage></ManagePackage>
         }
       ]
     }
