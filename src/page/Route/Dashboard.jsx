@@ -57,7 +57,7 @@ const Dashboard = () => {
         <div>
           <ul className="space-y-3">
             <NavLink
-              to="/dashboard/package"
+              to="/dashboard/addPackage"
               className={({ isActive }) =>
                 isActive
                   ? "block px-4 py-2 bg-blue-700 rounded-md shadow-lg"
