@@ -2,49 +2,61 @@ import usePackage from "../../Hooks/usePackage";
 
 /* eslint-disable no-unused-vars */
 const ManagePackage = () => {
-  const {packages}  = usePackage()
+  const { packages } = usePackage()
 
   // console.log(packages)  /
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
-      <div className="w-full max-w-5xl bg-white rounded-lg shadow-lg p-8">
-        <h2 className="text-2xl font-bold text-center mb-6" style={{ color: "#F9A51A" }}>
-          Manage Packages
-        </h2>
-        <div className="overflow-x-auto">
-          <table className="w-full table-auto border-collapse border border-gray-200">
-            <thead>
-              <tr className="bg-orange-500 text-white">
-                <th className="px-4 py-2 border"></th>
-                <th className="px-4 py-2 border">Package Title</th>
-                <th className="px-4 py-2 border">Duration</th>
-                <th className="px-4 py-2 border">Price</th>
-                <th className="px-4 py-2 border">Actions</th>
+    <div className="min-h-screen bg-gray-50 py-10">
+      <div className="container mx-auto px-4">
+        <h1 className="text-3xl font-bold text-[#F9A51A] text-center mb-8">
+          All Packages
+        </h1>
+        <div className="overflow-x-auto shadow-md rounded-lg">
+          <table className="table-auto w-full text-left bg-white">
+            <thead className="bg-[#F9A51A] text-white uppercase text-sm">
+              <tr>
+                <th className="px-6 py-3">#</th>
+                <th className="px-6 py-3">Package Name</th>
+                <th className="px-6 py-3">Duration</th>
+                <th className="px-6 py-3">Price</th>
+                <th className="px-6 py-3">Actions</th>
               </tr>
             </thead>
             <tbody>
-              {/* Example Row */}
-              {packages.map((pkg, index) => (
-                <tr key={index} className="even:bg-gray-100">
-                  <td className="px-4 py-2 border"> {index + 1}</td>
-                  <td className="px-4 py-2 border">{pkg.title}</td>
-                  <td className="px-4 py-2 border">{pkg.duration}</td>
-                  <td className="px-4 py-2 border">$ {pkg.price}</td>
-                  <td className="px-4 py-2 border text-center space-x-4">
-                    <button
-                      className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 shadow transform hover:scale-105 transition-transform duration-300"
-                    >
-                      Update
-                    </button>
-                    <button
-                      className="px-3 py-1 rounded bg-red-500 text-white hover:bg-red-600 shadow transform hover:scale-105 transition-transform duration-300"
-                    >
-                      Delete
-                    </button>
+              {packages && packages.length > 0 ? (
+                packages.map((pkg, index) => (
+                  <tr
+                    key={pkg.id || index}
+                    className={`${index % 2 === 0 ? "bg-gray-50" : "bg-gray-100"
+                      } hover:bg-[#F9A51A]/10`}
+                  >
+                    <td className="px-6 py-4 text-gray-700 font-medium">
+                      {index + 1}.
+                    </td>
+                    <td className="px-6 py-4 text-gray-700">{pkg.title}</td>
+                    <td className="px-6 py-4 text-gray-700">{pkg.duration}</td>
+                    <td className="px-6 py-4 text-gray-700">$ {pkg.price}</td>
+                    <td className="px-6 py-4 text-gray-700">
+                      <button className="bg-[#F9A51A] text-white px-4 py-2 rounded-md shadow hover:bg-orange-600 transition duration-300">
+                        Edit
+                      </button>
+                      <button className="ml-3 bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 transition duration-300">
+                        Remove
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td
+                    colSpan="5"
+                    className="px-6 py-4 text-center text-gray-500"
+                  >
+                    No users found.
                   </td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
