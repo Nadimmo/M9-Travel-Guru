@@ -1,5 +1,11 @@
+import usePackage from "../../Hooks/usePackage";
 
+/* eslint-disable no-unused-vars */
 const ManagePackage = () => {
+  const {packages}  = usePackage()
+
+  // console.log(packages)  /
+
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-5xl bg-white rounded-lg shadow-lg p-8">
@@ -10,6 +16,7 @@ const ManagePackage = () => {
           <table className="w-full table-auto border-collapse border border-gray-200">
             <thead>
               <tr className="bg-orange-500 text-white">
+                <th className="px-4 py-2 border"></th>
                 <th className="px-4 py-2 border">Package Title</th>
                 <th className="px-4 py-2 border">Duration</th>
                 <th className="px-4 py-2 border">Price</th>
@@ -18,11 +25,12 @@ const ManagePackage = () => {
             </thead>
             <tbody>
               {/* Example Row */}
-              {[1, 2, 3].map((_, index) => (
+              {packages.map((pkg, index) => (
                 <tr key={index} className="even:bg-gray-100">
-                  <td className="px-4 py-2 border">Package {index + 1}</td>
-                  <td className="px-4 py-2 border">{index + 3} Days</td>
-                  <td className="px-4 py-2 border">${(index + 1) * 100}</td>
+                  <td className="px-4 py-2 border"> {index + 1}</td>
+                  <td className="px-4 py-2 border">{pkg.title}</td>
+                  <td className="px-4 py-2 border">{pkg.duration}</td>
+                  <td className="px-4 py-2 border">$ {pkg.price}</td>
                   <td className="px-4 py-2 border text-center space-x-4">
                     <button
                       className="px-3 py-1 rounded bg-blue-500 text-white hover:bg-blue-600 shadow transform hover:scale-105 transition-transform duration-300"

@@ -13,7 +13,7 @@ const AllBooking = () => {
   return (
     <div className="py-10 px-6">
       <h2 className="text-3xl font-bold text-center mb-6 text-[#F9A51A]">
-        My Bookings
+        All Bookings
       </h2>
       <div className="mb-6">
         <div className="flex justify-between items-center bg-[#F9A51A]/20 p-4 rounded-lg shadow-md">
