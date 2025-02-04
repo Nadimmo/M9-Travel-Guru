@@ -1,10 +1,36 @@
+import Swal from "sweetalert2";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import usePackage from "../../Hooks/usePackage";
 
 /* eslint-disable no-unused-vars */
 const ManagePackage = () => {
-  const { packages } = usePackage()
+  const {refetch, packages } = usePackage()
+  const axiosPublic = useAxiosPublic()
 
   // console.log(packages)  /
+
+  const handlerRemove = (id) => {
+    axiosPublic.delete(`/packages/${id}`)
+      .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "Package removed successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        refetch()
+      })
+      .catch((error) => {
+        Swal.fire({
+          position: "top-end",
+          icon: "error",
+          title: error.message,
+          showConfirmButton: false,
+          timer: 1500,
+        });
+      });
+  }
 
   return (
     <div className="min-h-screen bg-gray-50 py-10">
@@ -41,7 +67,7 @@ const ManagePackage = () => {
                       <button className="bg-[#F9A51A] text-white px-4 py-2 rounded-md shadow hover:bg-orange-600 transition duration-300">
                         Edit
                       </button>
-                      <button className="ml-3 bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 transition duration-300">
+                      <button onClick={() => handlerRemove(pkg._id)} className="ml-3 bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 transition duration-300">
                         Remove
                       </button>
                     </td>
