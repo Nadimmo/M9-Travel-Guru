@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import usePackage from "../../Hooks/usePackage";
+import { Link } from "react-router-dom";
 
 /* eslint-disable no-unused-vars */
 const ManagePackage = () => {
@@ -64,9 +65,9 @@ const ManagePackage = () => {
                     <td className="px-6 py-4 text-gray-700">{pkg.duration}</td>
                     <td className="px-6 py-4 text-gray-700">$ {pkg.price}</td>
                     <td className="px-6 py-4 text-gray-700">
-                      <button className="bg-[#F9A51A] text-white px-4 py-2 rounded-md shadow hover:bg-orange-600 transition duration-300">
+                      <Link to={`/dashboard/updatePackage/${pkg._id}`} className="bg-[#F9A51A] text-white px-4 py-2 rounded-md shadow hover:bg-orange-600 transition duration-300">
                         Edit
-                      </button>
+                      </Link> 
                       <button onClick={() => handlerRemove(pkg._id)} className="ml-3 bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 transition duration-300">
                         Remove
                       </button>

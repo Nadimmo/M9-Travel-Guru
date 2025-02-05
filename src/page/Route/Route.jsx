@@ -17,6 +17,7 @@ import MyDestination from "../Dashboard/MyDestination/MyDestination";
 import AllBooking from "../Dashboard/AllBooking/AllBooking";
 import AddPackage from "../Dashboard/AddPackage/AddPackage";
 import ManagePackage from "../Dashboard/ManagePackage/ManagePackage";
+import UpdatePackage from "../Dashboard/ManagePackage/UpdatePackage";
 
   const Route = createBrowserRouter([
     {
@@ -86,6 +87,10 @@ import ManagePackage from "../Dashboard/ManagePackage/ManagePackage";
         {
           path: 'manage',
           element: <ManagePackage></ManagePackage>
+        },
+        {
+          path: 'updatePackage/:id',  // dynamic routes  
+          element: <UpdatePackage></UpdatePackage>  
         }
       ]
     }
