@@ -1,9 +1,12 @@
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import axios from "axios";
+import { useLoaderData } from "react-router-dom";
 
 const UpdatePackage = () => {
   const axiosPublic = useAxiosPublic();
+  const packages = useLoaderData()
+  console.log(packages)
 
 
   const handlerSubmit = (e) => {
@@ -15,42 +18,40 @@ const UpdatePackage = () => {
     const image = e.target.image.files[0];
     const offer = e.target.offer.value;
 
-    const formData = new FormData();  
-    formData.append("image", image);  
-    const response = axios.post('https://api.imgbb.com/1/upload?key=425000ec487abe2b84d0bb7de5769c3a',formData)
+    const formData = new FormData();
+    formData.append("image", image);
+    const response = axios.post('https://api.imgbb.com/1/upload?key=425000ec487abe2b84d0bb7de5769c3a', formData)
     // Upload the image to ImgBB  
-    response.then((res) => {    
-      const imageUrl = res.data.data.url;    
-      axiosPublic.post('/addPackages', {      
-        title,      
-        description,      
-        price,      
-        duration,      
-        image: imageUrl,      
-        offer,    
-      })    
-      .then(res =>{      
-        if(res.data.insertedId){          
-          Swal.fire({            
-            title: 'Update Package  successfully!',            
-            text: 'Thank you for your feedback.',            
-            icon: 'success',          
-          });        
-        }    
-      })    
-      .catch(err =>{      
-        Swal.fire({          
-          title: 'Error!',          
-          text: err.message,          
-          icon: 'error',        
-        });    
-      })    
+    // console.log(response.data.data.url)
+    response.then((res) => {
+      const imageUrl = res.data.data.url;
+      axiosPublic.patch(`/updatePackage/${packages._id}`, {
+        title,
+        description,
+        price,
+        duration,
+        image: imageUrl,
+        offer,
+      })
+        .then(res => {
+          if (res.data.modifiedCount === 1) {
+            Swal.fire({
+              title: 'Update Package  successfully!',
+              text: 'Thank you for your feedback.',
+              icon: 'success',
+            });
+          }
+        })
+        .catch(err => {
+          Swal.fire({
+            title: 'Error!',
+            text: err.message,
+            icon: 'error',
+          });
+        })
       e.target.reset(); // Reset the form after submission  
-    }); 
-  
-
-
-}
+    })
+  }
 
   return (
     <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
@@ -65,6 +66,7 @@ const UpdatePackage = () => {
               Title
             </label>
             <input
+              defaultValue={packages.title}
               name="title"
               type="text"
               id="title"
@@ -79,6 +81,7 @@ const UpdatePackage = () => {
               Description
             </label>
             <textarea
+              defaultValue={packages.description}
               name="description"
               id="description"
               rows="4"
@@ -93,6 +96,7 @@ const UpdatePackage = () => {
               Price
             </label>
             <input
+              defaultValue={packages.price}
               name="price"
               type="number"
               id="price"
@@ -107,6 +111,7 @@ const UpdatePackage = () => {
               Duration
             </label>
             <input
+              defaultValue={packages.duration}
               name="duration"
               type="text"
               id="duration"
@@ -121,6 +126,8 @@ const UpdatePackage = () => {
               Image
             </label>
             <input
+              accept="image/*"
+              multiple={false}
               name="image"
               type="file"
               id="image"
@@ -134,6 +141,7 @@ const UpdatePackage = () => {
               Offer (Optional)
             </label>
             <input
+              defaultValue={packages.offer}
               name="offer"
               type="text"
               id="offer"
@@ -147,7 +155,7 @@ const UpdatePackage = () => {
             type="submit"
             className="w-full py-3 rounded-lg text-white font-bold bg-orange-500 hover:bg-orange-600 shadow-lg transform hover:scale-105 transition-transform duration-300"
           >
-            Submit
+            Update Package
           </button>
         </form>
       </div>

@@ -12,6 +12,7 @@ const FeaturedTravelPackages = () => {
   const {user} = useContext(AuthContext)
   const axiosPublic = useAxiosPublic()
   const navigate = useNavigate()
+  // console.log(packages[0].image)
 
   const handleBookNow = (pkg) => {
     if (!user) {

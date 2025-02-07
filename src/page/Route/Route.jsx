@@ -90,7 +90,8 @@ import UpdatePackage from "../Dashboard/ManagePackage/UpdatePackage";
         },
         {
           path: 'updatePackage/:id',  // dynamic routes  
-          element: <UpdatePackage></UpdatePackage>  
+          element: <UpdatePackage></UpdatePackage>,  
+          loader: ({params})=> fetch(`http://localhost:5000/packages/${params.id}`) 
         }
       ]
     }
