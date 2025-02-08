@@ -1,7 +1,35 @@
+import Swal from "sweetalert2";
 import useAllUsers from "../../Hooks/useAllUsers";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 
 const AllUsers = () => {
-  const { users } = useAllUsers();
+  const {refetch, users } = useAllUsers();
+  const axiosPublic = useAxiosPublic();  
+
+  const  handlerRemove = (id) => {
+    // console.log("Remove user", id);
+
+    axiosPublic.delete(`/users/${id}`)
+     .then(() => {
+        Swal.fire({
+          position: "top-end",
+          icon: "success",
+          title: "User removed successfully",
+          showConfirmButton: false,
+          timer: 1500,
+        });
+        // Refetch users after deleting
+        refetch();
+      })
+     .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Oops...",
+          text: "Something went wrong while removing user!",
+        });
+        console.error("Error removing user:", error);
+      });
+  } 
 
   return (
     <div className="min-h-screen bg-gray-50 py-10">
@@ -40,7 +68,7 @@ const AllUsers = () => {
                       </button>
                     </td>
                     <td className="px-6 py-4">
-                      <button className="ml-3 bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 transition duration-300">
+                      <button onClick={()=>handlerRemove(user._id)} className="ml-3 bg-red-500 text-white px-4 py-2 rounded-md shadow hover:bg-red-600 transition duration-300">
                         Delete
                       </button>
                     </td>
