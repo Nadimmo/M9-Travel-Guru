@@ -1,10 +1,10 @@
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import axios from "axios";
 import { useLoaderData } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const UpdatePackage = () => {
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
   const packages = useLoaderData()
   console.log(packages)
 
@@ -25,7 +25,7 @@ const UpdatePackage = () => {
     // console.log(response.data.data.url)
     response.then((res) => {
       const imageUrl = res.data.data.url;
-      axiosPublic.patch(`/updatePackage/${packages._id}`, {
+      axiosSecure.patch(`/updatePackage/${packages._id}`, {
         title,
         description,
         price,

@@ -1,17 +1,17 @@
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import usePackage from "../../Hooks/usePackage";
 import { Link } from "react-router-dom";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 /* eslint-disable no-unused-vars */
 const ManagePackage = () => {
   const {refetch, packages } = usePackage()
-  const axiosPublic = useAxiosPublic()
+  const axiosSecure = useAxiosSecure()
 
   // console.log(packages)  /
 
   const handlerRemove = (id) => {
-    axiosPublic.delete(`/packages/${id}`)
+    axiosSecure.delete(`/packages/${id}`)
       .then(() => {
         Swal.fire({
           position: "top-end",

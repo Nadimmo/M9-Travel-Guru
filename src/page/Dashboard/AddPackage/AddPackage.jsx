@@ -1,10 +1,11 @@
 import Swal from "sweetalert2";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+// import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import axios from "axios";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AddPackage = () => {
-  const axiosPublic = useAxiosPublic();
-
+  // const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const handlerSubmit = (e) => {
     e.preventDefault();
@@ -21,7 +22,7 @@ const AddPackage = () => {
     // Upload the image to ImgBB  
     response.then((res) => {    
       const imageUrl = res.data.data.url;    
-      axiosPublic.post('/addPackages', {      
+      axiosSecure.post('/addPackages', {      
         title,      
         description,      
         price,      

@@ -1,14 +1,14 @@
 import Swal from "sweetalert2";
 import useAllUsers from "../../Hooks/useAllUsers";
-import useAxiosPublic from "../../Hooks/useAxiosPublic";
+import useAxiosSecure from "../../Hooks/useAxiosSecure";
 
 const AllUsers = () => {
   const { refetch, users } = useAllUsers();
-  const axiosPublic = useAxiosPublic();
+  const axiosSecure = useAxiosSecure();
 
   const handlerMakeAdmin = (id) => {
     // console.log("Make admin", id);
-    axiosPublic.patch(`/users/admin/${id}`)
+    axiosSecure.patch(`/users/admin/${id}`)
       .then(() => {
         Swal.fire({
           position: "top-end",
@@ -34,7 +34,7 @@ const AllUsers = () => {
   const handlerRemove = (id) => {
     // console.log("Remove user", id);
 
-    axiosPublic.delete(`/users/${id}`)
+    axiosSecure.delete(`/users/${id}`)
       .then(() => {
         Swal.fire({
           position: "top-end",
