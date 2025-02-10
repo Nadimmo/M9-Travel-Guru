@@ -2,10 +2,12 @@ import { useContext } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useAdmin from "../../Hooks/useAdmin";
 
 const Header = () => {
   const { user, logOut } = useContext(AuthContext)
   const  navigate  = useNavigate()
+  const {isAdmin } = useAdmin()
 
   const handlerSignOut = (e) => {
     e.preventDefault()
@@ -27,7 +29,8 @@ const Header = () => {
     <li> <NavLink to="/about"><a href="">About</a></NavLink></li>
     <li> <NavLink to="/booking"><a href="">Destination</a></NavLink></li>
     <li> <NavLink to="/search"><a href="">Search</a></NavLink></li>
-    <li> <NavLink to="/dashboard/booking"><a href="">Dashboard</a></NavLink></li>
+    {user && isAdmin &&  <li> <NavLink to="/dashboard/addPackage"><a href="">Dashboard</a></NavLink></li>}
+    {user && !isAdmin &&  <li> <NavLink to="/dashboard/booking"><a href="">Dashboard</a></NavLink></li>}
     <li> <NavLink to="/contact"><a href="">Contact</a></NavLink></li>
   </>
   return (

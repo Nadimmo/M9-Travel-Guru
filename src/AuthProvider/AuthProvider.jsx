@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 /* eslint-disable react/prop-types */
 /* eslint-disable no-unused-vars */
 import { createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
@@ -48,9 +49,9 @@ const AuthProvider = ({children}) => {
             setUser(currentUser)
             setLoading(false)
             console.log(currentUser)
-            const email = currentUser?.email
+      
             const userInfo = {
-                email:email,
+                email: currentUser?.email
             }
             if(currentUser){
                 axiosPublic.post('/jwt',userInfo)
@@ -68,7 +69,7 @@ const AuthProvider = ({children}) => {
         return ()=>{
             Unsubscribe()
         }
-    },[auth,axiosPublic])
+    },[axiosPublic])
 
     const userInfo = {
         register,

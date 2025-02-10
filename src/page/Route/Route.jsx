@@ -18,6 +18,7 @@ import AllBooking from "../Dashboard/AllBooking/AllBooking";
 import AddPackage from "../Dashboard/AddPackage/AddPackage";
 import ManagePackage from "../Dashboard/ManagePackage/ManagePackage";
 import UpdatePackage from "../Dashboard/ManagePackage/UpdatePackage";
+import AdminRoute from "../../PrivateRoute/AdminRoute";
 
   const Route = createBrowserRouter([
     {
@@ -74,23 +75,23 @@ import UpdatePackage from "../Dashboard/ManagePackage/UpdatePackage";
         // admin dashboard
         {
           path:'allUsers',
-          element: <AllUsers></AllUsers>
+          element: <AdminRoute><AllUsers></AllUsers></AdminRoute>
         },
         {
           path:'allBooking',
-          element: <AllBooking></AllBooking>
+          element: <AdminRoute><AllBooking></AllBooking></AdminRoute>
         },
         {
           path: 'addPackage',
-          element: <AddPackage></AddPackage>
+          element: <AdminRoute><AddPackage></AddPackage></AdminRoute>
         },
         {
           path: 'manage',
-          element: <ManagePackage></ManagePackage>
+          element: <AdminRoute><ManagePackage></ManagePackage></AdminRoute>
         },
         {
           path: 'updatePackage/:id',  // dynamic routes  
-          element: <UpdatePackage></UpdatePackage>,  
+          element: <AdminRoute><UpdatePackage></UpdatePackage></AdminRoute>,  
           loader: ({params})=> fetch(`http://localhost:5000/packages/${params.id}`) 
         }
       ]
