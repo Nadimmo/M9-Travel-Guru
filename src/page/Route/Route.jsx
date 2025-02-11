@@ -19,11 +19,13 @@ import AddPackage from "../Dashboard/AddPackage/AddPackage";
 import ManagePackage from "../Dashboard/ManagePackage/ManagePackage";
 import UpdatePackage from "../Dashboard/ManagePackage/UpdatePackage";
 import AdminRoute from "../../PrivateRoute/AdminRoute";
+import ErrorPage from "../ErrorPage/ErrorPage";
 
   const Route = createBrowserRouter([
     {
       path: "/",
       element: <Root></Root>,
+      errorElement: <ErrorPage></ErrorPage>,
       children: [
         {
             path:"/",
