@@ -1,6 +1,7 @@
 import Swal from "sweetalert2";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import useBooking from "../../Hooks/useBooking";
+import { Link } from "react-router-dom";
 
 const MyBooking = () => {
   const { bookings, refetch} = useBooking();
@@ -43,13 +44,14 @@ const MyBooking = () => {
         My Bookings
       </h2>
       <div className="mb-6">
-        <div className="flex justify-between items-center bg-blue-100 p-4 rounded-lg shadow-md">
+        <div className="lg:grid  grid-cols-3 bg-blue-100 p-4 rounded-lg shadow-md">
           <p className="text-lg font-semibold text-blue-700">
             Total Bookings: <span className="font-bold">{totalBookings}</span>
           </p>
           <p className="text-lg font-semibold text-green-700">
             Total Price: <span className="font-bold">$ {totalPrice}</span>
           </p>
+          <Link to="/dashboard/payment" className="btn w-1/2 text-blue-700 font-semibold">Payment</Link>
         </div>
       </div>
       <div className="overflow-x-auto shadow-lg rounded-lg">

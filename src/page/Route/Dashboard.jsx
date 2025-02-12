@@ -7,8 +7,8 @@ const Dashboard = () => {
   return (
     <div className="flex min-h-screen">
       {/* Sidebar */}
-      <div className="bg-gradient-to-b from-blue-600 to-blue-400 text-white w-1/4 p-6">
-        <h2 className="text-2xl font-bold mb-6">Dashboard</h2>
+      <div className="bg-gradient-to-b from-blue-600 to-blue-400 text-white lg:w-1/4 p-6">
+        <h2 className="lg:text-2xl font-bold mb-6">Dashboard</h2>
         {/* Admin Links */}
         {
           isAdmin ? <> <div>

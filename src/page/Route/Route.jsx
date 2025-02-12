@@ -20,6 +20,7 @@ import ManagePackage from "../Dashboard/ManagePackage/ManagePackage";
 import UpdatePackage from "../Dashboard/ManagePackage/UpdatePackage";
 import AdminRoute from "../../PrivateRoute/AdminRoute";
 import ErrorPage from "../ErrorPage/ErrorPage";
+import Payment from "../Dashboard/Payment/Payment";
 
   const Route = createBrowserRouter([
     {
@@ -73,6 +74,10 @@ import ErrorPage from "../ErrorPage/ErrorPage";
         {
           path:'destination',
           element: <MyDestination></MyDestination>
+        },
+        {
+          path: 'payment',
+          element: <Payment></Payment>
         },
         // admin dashboard
         {
