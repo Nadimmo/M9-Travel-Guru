@@ -1,101 +1,114 @@
 /* eslint-disable no-unused-vars */
-import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js"
+import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import useBooking from "../../Hooks/useBooking";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import usePackage from "../../Hooks/usePackage";
+import Swal from "sweetalert2";
 
 const CheckOutForm = () => {
     const stripe = useStripe();
     const elements = useElements();
-    const { bookings } = useBooking()
-    const { user } = useContext(AuthContext)
-    const axiosSecure = useAxiosSecure()
-    const amount = bookings.reduce((acc, item) => acc + parseInt(item.price || 0), 0)
-    // console.log
+    const { bookings } = useBooking();
+    const { packages } = usePackage();
+    const { user } = useContext(AuthContext);
+    const axiosSecure = useAxiosSecure();
+    const amount = bookings.reduce((acc, item) => acc + parseInt(item.price || 0), 0);
+
     const [clientSecret, setClientSecret] = useState("");
-    // eslint-disable-next-line no-unused-vars
     const [transactionId, setTransactionId] = useState("");
     const [cartError, setCartError] = useState("");
 
     useEffect(() => {
-        axiosSecure.post("/create-payment-intent",{ price: amount})
-            .then(res => {
-                // console.log(res.data)
-                setClientSecret(res.data.clientSecret)
-            })
-            .catch((error) => {
-                console.error("Error creating payment intent:", error);
-                setCartError("Failed to create payment intent. Please try again.");
-            });
-        // eslint-disable-next-line react-hooks/exhaustive-deps
-    }, [axiosSecure,amount])
-
-
+        axiosSecure.post("/create-payment-intent", { price: amount })
+            .then(res => setClientSecret(res.data.clientSecret))
+            .catch(() => setCartError("Failed to create payment intent. Please try again."));
+    }, [axiosSecure, amount]);
 
     const handleSubmit = async (event) => {
-        // Block native form submission.
         event.preventDefault();
 
-        if (!stripe || !elements) {
-            return;
-        }
-
+        if (!stripe || !elements) return;
+        
         const card = elements.getElement(CardElement);
-        if (card === null) {
-            return;
-        }
+        if (!card) return;
 
-        // Use your card Element with other Stripe.js APIs
-        const { error, paymentMethod } = await stripe.createPaymentMethod({
-            type: 'card',
-            card,
-        });
-       
-        console.log("payment method",paymentMethod)
-       
-        const { error: cartError, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
+        const { error, paymentIntent } = await stripe.confirmCardPayment(clientSecret, {
             payment_method: {
                 card: card,
-                billing_details:{
-                    name: user?.name || "anonymous",
-                    email: user?.email || "anonymous",
+                billing_details: {
+                    name: user?.displayName || "Anonymous",
+                    email: user?.email || "anonymous@example.com",
                 }
             }
         });
 
-        console.log("payment intent",paymentIntent)
         if (error) {
-            console.log('[error]', error);
-        } else {
-            console.log('[PaymentMethod]', paymentMethod);
+            setCartError(error.message);
+            return;
+        }
+
+        if (paymentIntent.status === "succeeded") {
+            const paymentInfo = {
+                name: user?.displayName,
+                email: user?.email,
+                transactionId: paymentIntent.id,
+                price: amount,
+                bookingIds: bookings.map(booking => booking._id),
+                packageIds: packages.map(pkg => pkg._id),
+            };
+
+            axiosSecure.post("/payments", paymentInfo)
+                .then(res => {
+                    console.log(res.data)
+                    setTransactionId(paymentIntent.id);
+                    if (res.data.PaymentResult?.insertedId) {
+                        Swal.fire({
+                            title: "Payment Successful!",
+                            text: "Your booking has been confirmed.",
+                            icon: "success",
+                            confirmButtonText: "Close"
+                        });
+                    }
+                })
+                .catch(() => setCartError("Failed to process payment. Please try again."));
         }
     };
 
-
     return (
-        <form onSubmit={handleSubmit}>
-            <CardElement
-                options={{
-                    style: {
-                        base: {
-                            fontSize: '16px',
-                            color: '#424770',
-                            '::placeholder': {
-                                color: '#aab7c4',
+        <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
+            <h2 className="text-xl font-semibold text-center mb-4">Checkout</h2>
+            {cartError && <p className="text-red-500 text-center mb-2">{cartError}</p>}
+            <form onSubmit={handleSubmit} className="space-y-4">
+                <div className="p-4 border rounded-md bg-gray-50">
+                    <CardElement
+                        options={{
+                            style: {
+                                base: {
+                                    fontSize: '16px',
+                                    color: '#424770',
+                                    '::placeholder': {
+                                        color: '#aab7c4',
+                                    },
+                                },
+                                invalid: {
+                                    color: '#9e2146',
+                                },
                             },
-                        },
-                        invalid: {
-                            color: '#9e2146',
-                        },
-                    },
-                }}
-            />
-            <button type="submit" disabled={!stripe}>
-                Pay
-            </button>
-        </form>
-    )
-}
+                        }}
+                    />
+                </div>
+                <button 
+                    type="submit" 
+                    disabled={!stripe} 
+                    className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 disabled:opacity-50">
+                    Pay {amount} USD
+                </button>
+            </form>
+            {transactionId && <p className="text-green-500 text-center mt-2">Transaction ID: {transactionId}</p>}
+        </div>
+    );
+};
 
-export default CheckOutForm
+export default CheckOutForm;
