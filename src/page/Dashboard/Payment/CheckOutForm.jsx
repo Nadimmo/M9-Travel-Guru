@@ -59,6 +59,7 @@ const CheckOutForm = () => {
                 email: user?.email,
                 transactionId: paymentIntent.id,
                 price: amount,
+                date: new Date(),
                 bookingIds: bookings.map(booking => booking._id),
                 packageIds: packages.map(pkg => pkg._id),
             };
