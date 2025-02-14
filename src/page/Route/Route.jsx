@@ -21,6 +21,7 @@ import UpdatePackage from "../Dashboard/ManagePackage/UpdatePackage";
 import AdminRoute from "../../PrivateRoute/AdminRoute";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Payment from "../Dashboard/Payment/Payment";
+import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
 
   const Route = createBrowserRouter([
     {
@@ -78,6 +79,10 @@ import Payment from "../Dashboard/Payment/Payment";
         {
           path: 'payment',
           element: <Payment></Payment>
+        },
+        {
+          path:'paymentHistory',
+          element: <PaymentHistory></PaymentHistory>
         },
         // admin dashboard
         {

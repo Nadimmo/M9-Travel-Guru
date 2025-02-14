@@ -3,9 +3,10 @@ import { CardElement, useElements, useStripe } from "@stripe/react-stripe-js";
 import { useContext, useEffect, useState } from "react";
 import useBooking from "../../Hooks/useBooking";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
-import useAxiosSecure from "../../Hooks/useAxiosSecure";
+import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import usePackage from "../../Hooks/usePackage";
 import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 const CheckOutForm = () => {
     const stripe = useStripe();
@@ -13,24 +14,27 @@ const CheckOutForm = () => {
     const { bookings } = useBooking();
     const { packages } = usePackage();
     const { user } = useContext(AuthContext);
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     const amount = bookings.reduce((acc, item) => acc + parseInt(item.price || 0), 0);
 
     const [clientSecret, setClientSecret] = useState("");
     const [transactionId, setTransactionId] = useState("");
     const [cartError, setCartError] = useState("");
+    const navigate = useNavigate()
 
     useEffect(() => {
-        axiosSecure.post("/create-payment-intent", { price: amount })
-            .then(res => setClientSecret(res.data.clientSecret))
-            .catch(() => setCartError("Failed to create payment intent. Please try again."));
-    }, [axiosSecure, amount]);
+        if (amount > 0) {
+            axiosPublic.post("/create-payment-intent", { price: amount })
+                .then(res => setClientSecret(res.data.clientSecret))
+                .catch(() => setCartError("Failed to create payment intent. Please try again."));
+        }
+    }, [axiosPublic, amount]);
 
     const handleSubmit = async (event) => {
         event.preventDefault();
 
         if (!stripe || !elements) return;
-        
+
         const card = elements.getElement(CardElement);
         if (!card) return;
 
@@ -59,9 +63,9 @@ const CheckOutForm = () => {
                 packageIds: packages.map(pkg => pkg._id),
             };
 
-            axiosSecure.post("/payments", paymentInfo)
+            axiosPublic.post("/payments", paymentInfo)
                 .then(res => {
-                    console.log(res.data)
+                    // console.log(res.data)
                     setTransactionId(paymentIntent.id);
                     if (res.data.PaymentResult?.insertedId) {
                         Swal.fire({
@@ -71,6 +75,7 @@ const CheckOutForm = () => {
                             confirmButtonText: "Close"
                         });
                     }
+                    navigate("/dashboard/paymentHistory")
                 })
                 .catch(() => setCartError("Failed to process payment. Please try again."));
         }
@@ -99,9 +104,9 @@ const CheckOutForm = () => {
                         }}
                     />
                 </div>
-                <button 
-                    type="submit" 
-                    disabled={!stripe} 
+                <button
+                    type="submit"
+                    disabled={!stripe}
                     className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 disabled:opacity-50">
                     Pay {amount} USD
                 </button>

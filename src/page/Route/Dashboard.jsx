@@ -98,6 +98,16 @@ const Dashboard = () => {
                   My Destination
                 </NavLink>
                 <NavLink
+                  to="/dashboard/paymentHistory"
+                  className={({ isActive }) =>
+                    isActive
+                      ? "block px-4 py-2 bg-blue-700 rounded-md shadow-lg"
+                      : "block px-4 py-2 hover:bg-blue-500 rounded-md transition duration-200"
+                  }
+                >
+                  Payment History
+                </NavLink>
+                <NavLink
                   to="/"
                   className={({ isActive }) =>
                     isActive
