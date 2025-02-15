@@ -4,7 +4,6 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import useAxiosPublic from "../../Hooks/useAxiosPublic";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
-import ScrollAnimation from "react-animate-on-scroll";
 
 const FeaturedTravelPackages = () => {
   const { packages } = usePackage();
@@ -86,9 +85,8 @@ const FeaturedTravelPackages = () => {
   };
 
   return (
-    <ScrollAnimation animateIn="fadeInUp" duration={1}>
 
-      <div className="bg-gray-50 py-10 px-6">
+      <div data-aos="fade-down" className="bg-gray-50 py-10 px-6">
         <h2 className="text-3xl font-bold text-center mb-8">Featured Travel Packages</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {packages.map((pkg) => (
@@ -185,7 +183,6 @@ const FeaturedTravelPackages = () => {
           </div>
         )}
       </div>
-    </ScrollAnimation>
 
        
   );

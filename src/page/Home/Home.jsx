@@ -11,7 +11,7 @@ import Reviews from "./Reviews/Reviews";
 const Home = () => {
   return (
     <div className="bg-gray-100 py-10 px-6">
-      <div className="back min-h-screen p-5 lg:grid grid-cols-2 gap-10 items-center bg-gray-100 font-sans">
+      <div  className="back min-h-screen p-5 lg:grid grid-cols-2 gap-10 items-center bg-gray-100 font-sans">
         {/* Left Side Text */}
         <div className="space-y-5 ml-10 text-white">
           <h1 className="text-6xl font-bold  uppercase">Cox&apos;s Bazar</h1>

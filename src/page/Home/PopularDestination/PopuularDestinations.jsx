@@ -1,4 +1,3 @@
-import ScrollAnimation from "react-animate-on-scroll";
 
 const destinations = [
   {
@@ -33,9 +32,7 @@ const destinations = [
 
 const PopularDestinations = () => {
   return (
-    <ScrollAnimation animateIn='fadeIn'
-    >
-      <div className="bg-gray-100 py-10 px-6">
+      <div data-aos="fade-up" className="bg-gray-100 py-10 px-6">
         <h2 className="text-3xl font-bold text-center mb-8">Popular Destinations</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
           {destinations.map((destination) => (
@@ -65,7 +62,6 @@ const PopularDestinations = () => {
         </div>
 
       </div>
-    </ScrollAnimation>
   );
 };
 

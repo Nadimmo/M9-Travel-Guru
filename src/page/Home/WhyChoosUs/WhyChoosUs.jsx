@@ -23,7 +23,7 @@ const features = [
 
 const WhyChoosUs = () => {
   return (
-    <div className="bg-white py-12 px-6">
+    <div data-aos="fade-up-right" className="bg-white py-12 px-6">
       <h2 className="text-3xl font-bold text-center mb-10">Why Choose Us</h2>
       <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
         {features.map((feature) => (

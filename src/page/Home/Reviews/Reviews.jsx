@@ -9,7 +9,7 @@ import useReview from '../../Hooks/useReview';
 const Testimonials = () => {
   const {reviews} = useReview()
   return (
-    <section className="bg-gray-100 py-12">
+    <section data-aos="fade-up-left" className="bg-gray-100 py-12">
       <div className="max-w-7xl mx-auto px-4">
         <h2 className="text-3xl font-semibold text-center text-gray-800 mb-8">
           What Our Users Say

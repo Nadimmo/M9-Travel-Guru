@@ -21,7 +21,7 @@ const BlogAndNewsletter = () => {
     <div className="bg-gray-50 py-12 px-6">
       {/* Blog Section */}
       <h2 className="text-3xl font-bold text-center mb-10">Travel Inspiration</h2>
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
+      <div data-aos="zoom-in" className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12">
         {blogPosts.map((post) => (
           <div
             key={post.id}
@@ -47,7 +47,7 @@ const BlogAndNewsletter = () => {
       </div>
 
       {/* Newsletter Section */}
-      <div className="bg-blue-500 text-white py-8 px-6 rounded-lg text-center">
+      <div data-aos="zoom-in-up"  className="bg-blue-500 text-white py-8 px-6 rounded-lg text-center">
         <h2 className="text-2xl font-bold mb-4">Subscribe for Exclusive Deals & Updates!</h2>
         <p className="mb-6">Stay updated with the latest travel news and offers.</p>
         <div className="flex flex-col sm:flex-row justify-center items-center gap-4">
