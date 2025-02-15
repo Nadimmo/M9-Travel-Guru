@@ -4,7 +4,7 @@ import "../Home/home.css";
 const Contact = () => {
   return (
     <div className="back min-h-screen flex items-center justify-center bg-gray-100 py-10">
-      <div className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 flex flex-col md:flex-row">
+      <div data-aos="zoom-in" className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 flex flex-col md:flex-row">
         {/* Contact Form */}
         <form className="w-full md:w-1/2 pr-6">
           <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">

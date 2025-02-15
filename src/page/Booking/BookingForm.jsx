@@ -70,7 +70,7 @@ const BookingForm = () => {
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center py-10 font-bold">
+    <div data-aos="zoom-in" className="min-h-screen flex items-center justify-center py-10 font-bold">
       <form onSubmit={handleSubmit} className="bg-white shadow-lg rounded-lg p-8 w-full max-w-lg">
         <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">Book Your Trip</h2>
 
