@@ -107,7 +107,7 @@ const Register = () => {
   return (
     <div className="bg-gray-100 min-h-screen flex items-center justify-center">
 
-      <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl">
+      <div  data-aos="flip-right" className="bg-white shadow-lg rounded-lg p-8 w-full max-w-2xl">
         <h2 className="text-2xl font-bold text-center text-gray-800 mb-6">
           Create an Account
         </h2>

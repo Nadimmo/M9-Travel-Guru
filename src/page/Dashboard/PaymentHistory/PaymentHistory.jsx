@@ -21,7 +21,7 @@ const PaymentHistory = () => {
             </tr>
           </thead>
           <tbody>
-            {paymentsHistory.length > 0 ? (
+            {paymentsHistory?.length > 0 ? (
               paymentsHistory.map((payment, index) => (
                 <tr
                   key={index}

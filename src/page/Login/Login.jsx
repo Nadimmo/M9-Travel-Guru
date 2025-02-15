@@ -87,7 +87,7 @@ export const Login = () => {
 
     return (
         <div className="bg-gray-100 min-h-screen flex items-center justify-center">
-            <div className="bg-white shadow-lg rounded-lg p-8 w-full max-w-xl">
+            <div  data-aos="flip-left" className="bg-white shadow-lg rounded-lg p-8 w-full max-w-xl">
                 <h2 className="text-4xl text-left font-bold  text-gray-800 mb-6">
                     Login
                 </h2>

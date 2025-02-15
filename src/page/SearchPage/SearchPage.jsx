@@ -100,7 +100,9 @@ const SearchPage = () => {
       </div>
 
       {/* Content Section: Grid Layout */}
-      <div className="w-full overflow-y-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+      <div  data-aos="fade-down"
+     data-aos-easing="linear"
+     data-aos-duration="1500" className="w-full overflow-y-auto p-4 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
         {filteredData.map((category) =>
           category.items.map((item, index) => (
             <div
