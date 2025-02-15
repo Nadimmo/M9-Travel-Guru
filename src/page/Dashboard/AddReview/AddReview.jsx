@@ -66,7 +66,7 @@ const AddReview = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 py-10 px-4">
+    <div data-aos="zoom-in" className="min-h-screen flex flex-col justify-center items-center bg-gray-50 py-10 px-4">
       <div className="bg-white shadow-xl rounded-lg p-8 max-w-3xl w-full">
         <h2 className="text-3xl font-bold text-gray-800 text-center mb-8">Submit Your Review</h2>
         <form onSubmit={handleSubmit} className="space-y-6">
