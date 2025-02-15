@@ -54,7 +54,7 @@ const UpdatePackage = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
+    <div data-aos="zoom-out" className="min-h-screen bg-gray-100 flex items-center justify-center p-4">
       <div className="w-full max-w-3xl bg-white rounded-lg shadow-lg p-8">
         <h2 className="text-2xl font-bold text-center mb-6" style={{ color: "#F9A51A" }}>
           Update a Package
