@@ -1,12 +1,69 @@
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from "react-icons/fa";
 import "../Home/home.css";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
+import Swal from "sweetalert2";
+import { useContext } from "react";
+import { AuthContext } from "../../AuthProvider/AuthProvider";
+import { useNavigate } from "react-router-dom";
 
 const Contact = () => {
+  const axiosPublic = useAxiosPublic()
+  const { user } = useContext(AuthContext)
+  const navigate = useNavigate()
+
+
+  const handlerSubmit = (e) => {
+    e.preventDefault()
+    const name = e.target.name.value
+    const email = e.target.email.value
+    const message = e.target.message.value
+    if (!user) {
+      Swal.fire({
+        title: "Not Logged In",
+        text: "You need to log in to book a package.",
+        icon: "warning",
+        showCancelButton: true,
+        confirmButtonColor: "#3085d6",
+        cancelButtonColor: "#d33",
+        confirmButtonText: "Log In",
+      }).then((result) => {
+        if (result.isConfirmed) {
+          navigate("/login");
+        }
+      });
+      return;
+    }
+    //send data in database
+    axiosPublic.post("/contacts", {
+      name,
+      email,
+      message
+    }).then(res => {
+      if (res.data.insertedId) {
+        Swal.fire({
+          title: "Message Sent!",
+          text: "We have received your message and will get back to you soon.",
+          icon: "success",
+          confirmButtonText: "Okay",
+        })
+        e.target.reset()
+      }
+      // eslint-disable-next-line no-unused-vars
+    }).catch(err => {
+      Swal.fire({
+        title: "Error!",
+        text: "Something went wrong while sending your message. Please try again later.",
+        icon: "error",
+        confirmButtonText: "Okay",
+      })
+    })
+  }
+
   return (
     <div className="back min-h-screen flex items-center justify-center bg-gray-100 py-10">
       <div data-aos="zoom-in" className="w-full max-w-4xl bg-white shadow-lg rounded-lg p-8 flex flex-col md:flex-row">
         {/* Contact Form */}
-        <form className="w-full md:w-1/2 pr-6">
+        <form onSubmit={handlerSubmit} className="w-full md:w-1/2 pr-6">
           <h2 className="text-2xl font-semibold mb-6 text-center text-gray-800">
             Get in Touch
           </h2>
@@ -86,7 +143,7 @@ const Contact = () => {
           </p>
           <div className="mb-6">
             <p className="text-gray-700">
-              <strong>Address:</strong> 123 Main Street, Rangpur city, Bangladesh 
+              <strong>Address:</strong> 123 Main Street, Rangpur city, Bangladesh
             </p>
             <p className="text-gray-700">
               <strong>Email:</strong> contact@travelguru.com.

@@ -54,6 +54,16 @@ const Dashboard = () => {
                 Manage User
               </NavLink>
               <NavLink
+                to="/dashboard/userRequests"
+                className={({ isActive }) =>
+                  isActive
+                    ? "block px-4 py-2 bg-blue-700 rounded-md shadow-lg"
+                    : "block px-4 py-2 hover:bg-blue-500 rounded-md transition duration-200"
+                }
+              >
+                User Request
+              </NavLink>
+              <NavLink
                 to="/"
                 className={({ isActive }) =>
                   isActive

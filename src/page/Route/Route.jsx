@@ -22,6 +22,7 @@ import AdminRoute from "../../PrivateRoute/AdminRoute";
 import ErrorPage from "../ErrorPage/ErrorPage";
 import Payment from "../Dashboard/Payment/Payment";
 import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
+import UserRequest from "../Dashboard/UserRequest/UserRequest";
 
   const Route = createBrowserRouter([
     {
@@ -105,6 +106,10 @@ import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
           path: 'updatePackage/:id',  // dynamic routes  
           element: <AdminRoute><UpdatePackage></UpdatePackage></AdminRoute>,  
           loader: ({params})=> fetch(`https://travel-guru-server-side-sigma.vercel.app/packages/${params.id}`) 
+        },
+        {
+          path: 'userRequests',
+          element: <AdminRoute><UserRequest></UserRequest></AdminRoute>
         }
       ]
     }
