@@ -104,7 +104,7 @@ import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
         {
           path: 'updatePackage/:id',  // dynamic routes  
           element: <AdminRoute><UpdatePackage></UpdatePackage></AdminRoute>,  
-          loader: ({params})=> fetch(`http://localhost:5000/packages/${params.id}`) 
+          loader: ({params})=> fetch(`https://travel-guru-server-side-sigma.vercel.app/packages/${params.id}`) 
         }
       ]
     }
