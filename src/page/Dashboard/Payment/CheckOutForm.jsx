@@ -20,7 +20,7 @@ const CheckOutForm = () => {
     const [clientSecret, setClientSecret] = useState("");
     const [transactionId, setTransactionId] = useState("");
     const [cartError, setCartError] = useState("");
-    const navigate = useNavigate()
+    const navigate = useNavigate();
 
     useEffect(() => {
         if (amount > 0) {
@@ -66,7 +66,6 @@ const CheckOutForm = () => {
 
             axiosPublic.post("/payments", paymentInfo)
                 .then(res => {
-                    // console.log(res.data)
                     setTransactionId(paymentIntent.id);
                     if (res.data.PaymentResult?.insertedId) {
                         Swal.fire({
@@ -76,45 +75,79 @@ const CheckOutForm = () => {
                             confirmButtonText: "Close"
                         });
                     }
-                    navigate("/dashboard/paymentHistory")
+                    navigate("/dashboard/paymentHistory");
                 })
                 .catch(() => setCartError("Failed to process payment. Please try again."));
         }
     };
 
     return (
-        <div className="max-w-md mx-auto p-6 bg-white shadow-lg rounded-lg">
-            <h2 className="text-xl font-semibold text-center mb-4">Checkout</h2>
-            {cartError && <p className="text-red-500 text-center mb-2">{cartError}</p>}
-            <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="p-3 sm:p-4 border rounded-md bg-gray-50
-                w-full
-                min-h-[48px] sm:min-h-[56px] md:min-h-[64px]">
-                    <CardElement
-                        options={{
-                            style: {
-                                base: {
-                                    fontSize: '16px',
-                                    color: '#424770',
-                                    '::placeholder': {
-                                        color: '#aab7c4',
-                                    },
-                                },
-                                invalid: {
-                                    color: '#9e2146',
-                                },
-                            },
-                        }}
-                    />
+        <div className="w-full min-h-screen flex items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
+            <div className="w-full max-w-md">
+                <div className="bg-white shadow-md sm:shadow-lg rounded-lg p-4 sm:p-6 md:p-8">
+                    {/* Header */}
+                    <h2 className="text-lg sm:text-xl md:text-2xl font-semibold text-center mb-4 sm:mb-6 text-gray-800">
+                        Checkout
+                    </h2>
+
+                    {/* Error Message */}
+                    {cartError && (
+                        <div className="mb-4 p-3 bg-red-50 border border-red-200 rounded-md">
+                            <p className="text-red-600 text-sm sm:text-base text-center">
+                                {cartError}
+                            </p>
+                        </div>
+                    )}
+
+                    {/* Form */}
+                    <form onSubmit={handleSubmit} className="space-y-4 sm:space-y-5">
+                        {/* Card Element Container */}
+                        <div className="p-3 sm:p-4 md:p-5 border border-gray-300 rounded-md bg-gray-50 min-h-[56px] sm:min-h-[64px] flex items-center">
+                            <div className="w-full">
+                                <CardElement
+                                    options={{
+                                        style: {
+                                            base: {
+                                                fontSize: '14px',
+                                                '@media (min-width: 640px)': {
+                                                    fontSize: '16px',
+                                                },
+                                                color: '#424770',
+                                                '::placeholder': {
+                                                    color: '#aab7c4',
+                                                },
+                                                lineHeight: '24px',
+                                            },
+                                            invalid: {
+                                                color: '#9e2146',
+                                            },
+                                        },
+                                    }}
+                                />
+                            </div>
+                        </div>
+
+                        {/* Submit Button */}
+                        <button
+                            type="submit"
+                            disabled={!stripe || !clientSecret}
+                            className="w-full bg-blue-600 text-white py-3 sm:py-3.5 px-4 rounded-md text-sm sm:text-base font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed transition-colors duration-200">
+                            Pay ${amount.toFixed(2)} USD
+                        </button>
+                    </form>
+
+                    {/* Transaction Success Message */}
+                    {transactionId && (
+                        <div className="mt-4 p-3 bg-green-50 border border-green-200 rounded-md">
+                            <p className="text-green-700 text-xs sm:text-sm text-center break-all">
+                                <span className="font-semibold">Transaction ID:</span>
+                                <br className="sm:hidden" />
+                                <span className="sm:ml-2">{transactionId}</span>
+                            </p>
+                        </div>
+                    )}
                 </div>
-                <button
-                    type="submit"
-                    disabled={!stripe}
-                    className="w-full bg-blue-600 text-white py-2 rounded-md hover:bg-blue-700 disabled:opacity-50">
-                    Pay {amount} USD
-                </button>
-            </form>
-            {transactionId && <p className="text-green-500 text-center mt-2">Transaction ID: {transactionId}</p>}
+            </div>
         </div>
     );
 };
