@@ -87,7 +87,9 @@ const CheckOutForm = () => {
             <h2 className="text-xl font-semibold text-center mb-4">Checkout</h2>
             {cartError && <p className="text-red-500 text-center mb-2">{cartError}</p>}
             <form onSubmit={handleSubmit} className="space-y-4">
-                <div className="p-4 border rounded-md bg-gray-50">
+                <div className="p-3 sm:p-4 border rounded-md bg-gray-50
+                w-full
+                min-h-[48px] sm:min-h-[56px] md:min-h-[64px]">
                     <CardElement
                         options={{
                             style: {
