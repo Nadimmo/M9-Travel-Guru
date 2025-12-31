@@ -158,3 +158,6 @@ This project is licensed under the MIT License.
 
 ## Live Site
 -  https://travel-guru-zeta.vercel.app
+---
+## Presentation Preview
+-  https://www.pi.inc/docs/397102235983726?share_token=3JWZMGNECPXKQ
