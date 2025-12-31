@@ -99,7 +99,7 @@ VITE_STRIPE_PUBLIC_KEY=your_stripe_public_key
 
 ### 1️⃣ Clone the Repository
 ```
-git clone https://github.com/your-username/travel-guru.git
+git clone https://github.com/Nadimmo/M9-Travel-Guru.git
 cd travel-guru
 ```
 
