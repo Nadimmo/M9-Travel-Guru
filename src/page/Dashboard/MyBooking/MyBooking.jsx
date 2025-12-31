@@ -46,14 +46,14 @@ const MyBooking = () => {
         My Bookings
       </h2>
       <div className="mb-6">
-        <div className="lg:grid  grid-cols-3 bg-blue-100 p-4 rounded-lg shadow-md">
-          <p className="text-lg font-semibold text-blue-700">
+        <div className="sm:w-1/2 lg:w-full grid  lg:grid-cols-3 bg-blue-100 p-4 rounded-lg shadow-md">
+          <p className="text-lg  font-semibold text-blue-700 mt-2">
             Total Bookings: <span className="font-bold">{totalBookings}</span>
           </p>
-          <p className="text-lg font-semibold text-green-700">
+          <p className="text-lg font-semibold text-green-700 mt-2">
             Total Price: <span className="font-bold">$ {totalPrice}</span>
           </p>
-          <Link to="/dashboard/payment" className="btn w-1/2 text-blue-700 font-semibold">Payment</Link>
+          <Link to="/dashboard/payment" className="btn w-1/2 lg:mt-0  mt-2 text-blue-700 font-semibold">Payment</Link>
         </div>
       </div>
       <div className="overflow-x-auto shadow-lg rounded-lg">

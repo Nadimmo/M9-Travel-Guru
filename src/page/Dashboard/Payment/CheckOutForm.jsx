@@ -82,7 +82,7 @@ const CheckOutForm = () => {
     };
 
     return (
-        <div className="w-full min-h-screen flex items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
+        <div className="lg:w-full w-[360px] lg:min-h-screen flex items-center justify-center px-4 py-6 sm:px-6 lg:px-8">
             <div className="w-full max-w-md">
                 <div className="bg-white shadow-md sm:shadow-lg rounded-lg p-4 sm:p-6 md:p-8">
                     {/* Header */}
