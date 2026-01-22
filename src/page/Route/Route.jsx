@@ -23,6 +23,7 @@ import ErrorPage from "../ErrorPage/ErrorPage";
 import Payment from "../Dashboard/Payment/Payment";
 import PaymentHistory from "../Dashboard/PaymentHistory/PaymentHistory";
 import UserRequest from "../Dashboard/UserRequest/UserRequest";
+import ChatBox from "../ChatBox/ChatBox";
 
   const Route = createBrowserRouter([
     {
@@ -57,6 +58,10 @@ import UserRequest from "../Dashboard/UserRequest/UserRequest";
         {
             path:"/register",
             element: <Register></Register>
+        },
+        {
+          path:"/chat",
+          element: <ChatBox/>
         }
       ]
     },

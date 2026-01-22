@@ -1,4 +1,5 @@
 import { FaFacebookF, FaTwitter, FaInstagram, FaLinkedinIn } from 'react-icons/fa';
+import ChatBox from '../ChatBox/ChatBox';
 
 const Footer = () => {
   return (
@@ -54,6 +55,7 @@ const Footer = () => {
       </div>
       <div className="bg-gray-700 text-center text-sm py-4 mt-8">
         <p>&copy; 2025 Nadim Mostofa. All rights reserved.</p>
+        <ChatBox/>
       </div>
     </footer>
   );
