@@ -53,7 +53,7 @@ function ChatBox() {
 
       {/* Chat Panel */}
       {open && (
-        <div className="fixed bottom-20 right-6 w-[380px] h-[500px] bg-[#2b2b2b] rounded-2xl shadow-xl flex flex-col overflow-hidden">
+        <div className="fixed bottom-20 right-6 lg:w-[380px] h-[500px] bg-[#2b2b2b] rounded-2xl shadow-xl flex flex-col overflow-hidden">
           
           {/* Header */}
           <div className="p-4 bg-black text-white font-semibold">
